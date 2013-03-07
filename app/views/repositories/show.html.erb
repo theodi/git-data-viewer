@@ -1,2 +1,5 @@
-<h1>Repositories#show</h1>
-<p>Find me in app/views/repositories/show.html.erb</p>
+<h1><%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %></h1>
+
+<p>
+  <%= @repository %>
+</p>
