@@ -35,10 +35,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.1)
+    dotenv (0.5.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    github-api (0.0.1)
+      httparty
     hike (1.2.1)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     jbuilder (1.0.2)
       activesupport (>= 3.0.0)
@@ -53,6 +59,7 @@ GEM
     mime-types (1.21)
     minitest (4.6.2)
     multi_json (1.6.1)
+    multi_xml (0.5.3)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -109,6 +116,8 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0.beta1)
+  dotenv
+  github-api
   jbuilder (~> 1.0.1)
   jquery-rails
   rails (= 4.0.0.beta1)
