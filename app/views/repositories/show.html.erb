@@ -14,10 +14,6 @@
       <%= @metadata['description']%>
     </p>
 
-    <p> 
-      Repository: <%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %>
-    </p>
-    
     <p>
       Format: <span class='label label-success'><%= @format %></label>
     </p>
@@ -63,7 +59,7 @@
 
   <div class='span2'>
     <h3>Changes</h3>
-    <ul>
+    <ul class='unstyled'>
       <% @commits.each do |commit| %>
         <li>
           <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:short),
@@ -71,6 +67,11 @@
         </li>
       <% end %>
     </ul>
+    <p>
+      <a href='https://github.com/<%= @user %>/<%= @repo %>'>
+        View more on Github
+      </a>
+    </p>
 
   </div>
   
