@@ -24,4 +24,15 @@ The following environment variables should be set in a .env file in order to use
 
     GITHUB_OAUTH_TOKEN='your-oauth-token-for-your-app'
     
-See [peter-murach/github](https://github.com/peter-murach/github) for details on how to set this up.
+To get this token, create an application in Github/settings/applications and follow these instructions in ```irb```:
+
+    require 'github_api'
+    github = Github.new :client_id => '...', :client_secret => '...'
+    github.authorize_url :redirect_uri => '...', :scope => 'repo'
+
+Visit the URL it gives you. When you authorize it, it will send you to your redirect_uri with a token in the query string. Use this below:
+
+    token = github.get_token('<token from query string>')
+    puts token.token
+
+This is the OAuth token you need in your environment.
