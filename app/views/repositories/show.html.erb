@@ -1,5 +1,46 @@
-<h1><%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %></h1>
-
+<h1><%= @metadata['name'] %></h1>
+  
 <p>
-  <%= @repository %>
+  <%= @metadata['description']%>
 </p>
+
+<p> 
+  Repository: <%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %>
+</p>
+
+<h3>Definitions</h3>
+<table class='table table-striped'>
+  <tr>
+    <th>Label</th>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Unit</th>
+  </tr>
+  <% @metadata['definitions'].each do |definition| %>
+    <tr>
+      <td><%= definition['label'] %></td>
+      <td><%= definition['name'] %></td>
+      <td><%= definition['type'] %></td>
+      <td><%= definition['unit'] %></td>
+    </tr>
+  <% end %>
+  
+</table>
+
+
+<h3>Sample Data (10 of <%= @data.size %>)</h3>
+<table class='table table-striped'>
+  <tr>
+    <% @headers.each do |header| %>
+      <th><%= header %></th>
+    <% end %>
+  </tr>
+  <% @data.first(10).each do |row| %>
+    <tr>
+      <% @headers.each do |header| %>
+        <td><%= row[header] %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  
+</table>
