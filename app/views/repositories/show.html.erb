@@ -1,46 +1,62 @@
 <h1><%= @metadata['name'] %></h1>
+
+<div class='row'>  
   
-<p>
-  <%= @metadata['description']%>
-</p>
+  <div class='span8'>
+    <p>
+      <%= @metadata['description']%>
+    </p>
 
-<p> 
-  Repository: <%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %>
-</p>
+    <p> 
+      Repository: <%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %>
+    </p>
 
-<h3>Definitions</h3>
-<table class='table table-striped'>
-  <tr>
-    <th>Label</th>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Unit</th>
-  </tr>
-  <% @metadata['definitions'].each do |definition| %>
-    <tr>
-      <td><%= definition['label'] %></td>
-      <td><%= definition['name'] %></td>
-      <td><%= definition['type'] %></td>
-      <td><%= definition['unit'] %></td>
-    </tr>
-  <% end %>
-  
-</table>
-
-
-<h3>Sample Data (10 of <%= @data.size %>)</h3>
-<table class='table table-striped'>
-  <tr>
-    <% @headers.each do |header| %>
-      <th><%= header %></th>
-    <% end %>
-  </tr>
-  <% @data.first(10).each do |row| %>
-    <tr>
-      <% @headers.each do |header| %>
-        <td><%= row[header] %></td>
+    <h3>Definitions</h3>
+    <table class='table table-striped'>
+      <tr>
+        <th>Label</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Unit</th>
+      </tr>
+      <% @metadata['definitions'].each do |definition| %>
+        <tr>
+          <td><%= definition['label'] %></td>
+          <td><%= definition['name'] %></td>
+          <td><%= definition['type'] %></td>
+          <td><%= definition['unit'] %></td>
+        </tr>
       <% end %>
-    </tr>
-  <% end %>
   
-</table>
+    </table>
+
+
+    <h3>Sample Data (10 of <%= @data.size %>)</h3>
+    <table class='table table-striped'>
+      <tr>
+        <% @headers.each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </tr>
+      <% @data.first(10).each do |row| %>
+        <tr>
+          <% @headers.each do |header| %>
+            <td><%= row[header] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+  
+    </table>
+    
+  </div>
+
+  <div class='span3'>
+    <div class='well'>
+      <a href='https://github.com/<%= @user %>/<%= @repo %>/archive/master.zip' class='btn btn-primary'>
+        <i class='icon icon-white icon-download-alt'></i>
+        Download Dataset
+      </a>
+    </div>
+  </div>
+  
+</div>
