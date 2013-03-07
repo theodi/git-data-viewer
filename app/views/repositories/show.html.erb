@@ -1,13 +1,6 @@
-<div class='well pull-right'>
-  <a href='https://github.com/<%= @user %>/<%= @repo %>/archive/master.zip' class='btn btn-primary'>
-    <i class='icon icon-white icon-download-alt'></i>
-    Download Latest
-  </a>
-</div>
-
 <h1><%= @metadata['name'] %></h1>
 
-<div class='row'>  
+<div class='row-fluid'>  
   
   <div class='span9'>
     <p>
@@ -60,12 +53,19 @@
     
   </div>
 
-  <div class='span2'>
+  <div class='span3'>
+    <div class='well'>
+      <a href='https://github.com/<%= @user %>/<%= @repo %>/archive/master.zip' class='btn btn-primary'>
+        <i class='icon icon-white icon-download-alt'></i>
+        Download Latest
+      </a>
+    </div>
+
     <h3>Changes</h3>
     <ul class='unstyled'>
       <% @commits.each do |commit| %>
         <li>
-          <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:short),
+          <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:long),
            "https://github.com/#{@user}/#{@repo}/commit/#{commit['sha']}" %>
         </li>
       <% end %>
