@@ -18,6 +18,7 @@ class RepositoriesController < ApplicationController
       @headers = @metadata['definitions'].map{|x| x['label']}
       # Get data file
       if @metadata['data'].is_a?(String)
+        @format = @metadata['data'].split('.').last.upcase
         datafile = Net::HTTP.get(URI.parse("https://raw.github.com/#{@user}/#{@repo}/master/#{@metadata['data']}"))
         @data = CSV.parse(datafile, :headers => true)
       end

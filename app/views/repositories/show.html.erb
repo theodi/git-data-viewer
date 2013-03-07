@@ -17,7 +17,11 @@
     <p> 
       Repository: <%= link_to @user, @repository['owner']['html_url'] %>/<%= link_to @repo, @repository['html_url'] %>
     </p>
-
+    
+    <p>
+      Format: <span class='label label-success'><%= @format %></label>
+    </p>
+    
     <h3>Definitions</h3>
     <table class='table table-striped'>
       <tr>
