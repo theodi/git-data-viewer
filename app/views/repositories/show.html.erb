@@ -42,14 +42,14 @@
     </table>
 
 
-    <h3>Sample Data (10 of <%= @data.size %>)</h3>
+    <h3>Sample Data (5 of <%= @data.size %>)</h3>
     <table class='table table-striped'>
       <tr>
         <% @headers.each do |header| %>
           <th><%= header %></th>
         <% end %>
       </tr>
-      <% @data.first(10).each do |row| %>
+      <% @data.first(5).each do |row| %>
         <tr>
           <% @headers.each do |header| %>
             <td><%= row[header] %></td>
