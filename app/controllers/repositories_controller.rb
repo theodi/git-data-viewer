@@ -10,6 +10,7 @@ class RepositoriesController < ApplicationController
     @user, @repo = params[:id].split('/', 2)
     # Get git data
     @repository = $github.repos.get @user, @repo
+    @commits = $github.repos.commits.all @user, @repo
     # Get metadata
     if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{@user}/#{@repo}/master/metadata.json"))
       @metadata = JSON.parse(json)
