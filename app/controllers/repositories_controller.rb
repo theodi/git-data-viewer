@@ -1,28 +1,11 @@
-require 'csv'
-
 class RepositoriesController < ApplicationController
   
   def index
   end
   
   def show
-    # Get user and repository
-    @user, @repo = params[:id].split('/', 2)
-    # Get git data
-    @repository = $github.repos.get @user, @repo
-    @commits = $github.repos.commits.all @user, @repo
-    # Get metadata
-    if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{@user}/#{@repo}/master/metadata.json"))
-      @metadata = JSON.parse(json)
-      # Store headers
-      @headers = @metadata['definitions'].map{|x| x['label']}
-      # Get data file
-      if @metadata['data'].is_a?(String)
-        @format = @metadata['data'].split('.').last.upcase
-        datafile = Net::HTTP.get(URI.parse("https://raw.github.com/#{@user}/#{@repo}/master/#{@metadata['data']}"))
-        @data = CSV.parse(datafile, :headers => true)
-      end
-    end
+    url = "https://github.com/#{params[:id]}.git"
+    @repo = Repository.new(url: url)
   end
   
 end

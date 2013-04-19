@@ -1,17 +1,17 @@
-<h1><%= @metadata['name'] %></h1>
+<h1><%= @repo.metadata['name'] %></h1>
 
 <div class='row-fluid'>  
   
   <div class='span9'>
     <p>
-      <%= @metadata['description']%>
+      <%= @repo.metadata['description']%>
     </p>
 
     <dl class='dl-horizontal'>
       <dt>Format</dt>
-      <dd><span class='label label-success'><%= @format %></label></dd>
+      <dd><span class='label label-success'><%= @repo.format %></label></dd>
       <dt>License</dt>
-      <dd><%= link_to @metadata['license']['name'], @metadata['license']['url'] %></dd>
+      <dd><%= link_to @repo.metadata['license']['name'], @repo.metadata['license']['url'] %></dd>
     </dl>
     
     <h3>Definitions</h3>
@@ -22,7 +22,7 @@
         <th>Type</th>
         <th>Unit</th>
       </tr>
-      <% @metadata['definitions'].each do |definition| %>
+      <% @repo.metadata['definitions'].each do |definition| %>
         <tr>
           <td><%= definition['label'] %></td>
           <td><%= definition['name'] %></td>
@@ -34,16 +34,16 @@
     </table>
 
 
-    <h3>Sample Data (5 of <%= @data.size %>)</h3>
+    <h3>Sample Data (5 of <%= @repo.data.size %>)</h3>
     <table class='table table-striped'>
       <tr>
-        <% @headers.each do |header| %>
+        <% @repo.headers.each do |header| %>
           <th><%= header %></th>
         <% end %>
       </tr>
-      <% @data.first(5).each do |row| %>
+      <% @repo.data.first(5).each do |row| %>
         <tr>
-          <% @headers.each do |header| %>
+          <% @repo.headers.each do |header| %>
             <td><%= row[header] %></td>
           <% end %>
         </tr>
@@ -54,27 +54,29 @@
   </div>
 
   <div class='span3'>
-    <div class='well'>
-      <a href='https://github.com/<%= @user %>/<%= @repo %>/archive/master.zip' class='btn btn-primary'>
-        <i class='icon icon-white icon-download-alt'></i>
-        Download Latest
-      </a>
-    </div>
+    <% if @repo.hosted_by_github? %>
+      <div class='well'>
+        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>/archive/master.zip' class='btn btn-primary'>
+          <i class='icon icon-white icon-download-alt'></i>
+          Download Latest
+        </a>
+      </div>
 
-    <h3>Changes</h3>
-    <ul class='unstyled'>
-      <% @commits.each do |commit| %>
-        <li>
-          <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:long),
-           "https://github.com/#{@user}/#{@repo}/commit/#{commit['sha']}" %>
-        </li>
-      <% end %>
-    </ul>
-    <p>
-      <a href='https://github.com/<%= @user %>/<%= @repo %>'>
-        View more on Github
-      </a>
-    </p>
+      <h3>Changes</h3>
+      <ul class='unstyled'>
+        <% @repo.commits.each do |commit| %>
+          <li>
+            <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:long),
+             "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
+          </li>
+        <% end %>
+      </ul>
+      <p>
+        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>'>
+          View more on Github
+        </a>
+      </p>
+    <% end %>
 
   </div>
   
