@@ -10,6 +10,8 @@ group :development, :test do
 end
 
 group :production do
+  gem "foreman"
+  gem "thin"
   gem "mysql2"
 end
 

@@ -1,0 +1,5 @@
+concurrency: thin=1
+app: git-data-viewer
+user: odi
+template: config/foreman/
+port: 3000
