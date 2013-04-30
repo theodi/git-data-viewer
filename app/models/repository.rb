@@ -36,15 +36,15 @@ class Repository < ActiveRecord::Base
   end
 
   def headers
-    @headers ||= metadata ? metadata['definitions'].map{|x| x['label']} : []
+    @headers ||= metadata ? metadata['resources'][0]['schema']['fields'].map{|x| x['id']} : []
   end  
 
   def format
-    @format ||= metadata && metadata['data'].is_a?(String) ? metadata['data'].split('.').last.upcase : nil
+    @format ||= metadata && metadata['resources'][0]['path'].is_a?(String) ? metadata['resources'][0]['path'].split('.').last.upcase : nil
   end
     
   def data
-    @data ||= if metadata && metadata['data'].is_a?(String)
+    @data ||= if metadata && metadata['resources'][0]['path'].is_a?(String)
       datafile = Net::HTTP.get(URI.parse("https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{metadata['data']}"))
       CSV.parse(datafile, :headers => true)
     else

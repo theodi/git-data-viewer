@@ -11,45 +11,50 @@
       <dt>Format</dt>
       <dd><span class='label label-success'><%= @repo.format %></label></dd>
       <dt>License</dt>
-      <dd><%= link_to @repo.metadata['license']['name'], @repo.metadata['license']['url'] %></dd>
+      <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
     </dl>
     
-    <h3>Definitions</h3>
-    <table class='table table-striped'>
-      <tr>
-        <th>Label</th>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Unit</th>
-      </tr>
-      <% @repo.metadata['definitions'].each do |definition| %>
+    <% @repo.metadata['resources'].each do |resource| %>
+    
+      <h3></h3>
+
+      <table class='table table-striped'>
         <tr>
-          <td><%= definition['label'] %></td>
-          <td><%= definition['name'] %></td>
-          <td><%= definition['type'] %></td>
-          <td><%= definition['unit'] %></td>
+          <th>ID</th>
+          <th>Label</th>
+          <th>Type</th>
+          <th>Unit</th>
         </tr>
-      <% end %>
-  
-    </table>
-
-
-    <h3>Sample Data (5 of <%= @repo.data.size %>)</h3>
-    <table class='table table-striped'>
-      <tr>
-        <% @repo.headers.each do |header| %>
-          <th><%= header %></th>
+        <% resource['schema']['fields'].each do |field| %>
+          <tr>
+            <td><%= field['id'] %></td>
+            <td><%= field['label'] %></td>
+            <td><%= field['type'] %></td>
+            <td><%= field['unit']['id'] if field['unit'] %></td>
+          </tr>
         <% end %>
-      </tr>
-      <% @repo.data.first(5).each do |row| %>
+  
+      </table>
+
+
+      <h3>Sample Data (5 of <%= @repo.data.size %>)</h3>
+      <table class='table table-striped'>
         <tr>
           <% @repo.headers.each do |header| %>
-            <td><%= row[header] %></td>
+            <th><%= header %></th>
           <% end %>
         </tr>
-      <% end %>
+        <% @repo.data.first(5).each do |row| %>
+          <tr>
+            <% @repo.headers.each do |header| %>
+              <td><%= row[header] %></td>
+            <% end %>
+          </tr>
+        <% end %>
   
-    </table>
+      </table>
+  
+    <% end %>
     
   </div>
 
