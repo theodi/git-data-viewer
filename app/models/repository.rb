@@ -27,7 +27,7 @@ class Repository < ActiveRecord::Base
 
   def metadata
     @metadata ||= begin
-      if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/metadata.json"))
+      if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/datapackage.json"))
         JSON.parse(json)
       else
         nil
