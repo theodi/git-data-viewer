@@ -36,3 +36,6 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'github_api'
 gem 'dotenv'
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end
