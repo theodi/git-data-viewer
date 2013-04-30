@@ -17,3 +17,7 @@
 
 /.env
 .DS_Store
+*.pem
+id_rsa*
+/.chef/rackspace_secrets.yaml
+/.vagrant/
