@@ -68,6 +68,7 @@ GEM
     multi_json (1.7.2)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
+    mysql2 (0.3.11)
     nokogiri (1.5.9)
     oauth2 (0.9.1)
       faraday (~> 0.8)
@@ -76,7 +77,6 @@ GEM
       multi_json (~> 1.0)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    pg (0.15.1)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -145,7 +145,7 @@ DEPENDENCIES
   github_api
   jbuilder (~> 1.0.1)
   jquery-rails
-  pg
+  mysql2
   rails (= 4.0.0.rc1)
   rspec-rails (~> 2.0)
   sass-rails (~> 4.0.0.rc1)
