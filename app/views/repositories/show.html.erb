@@ -23,6 +23,7 @@
           <tr>
             <th>ID</th>
             <th>Label</th>
+            <th>Description</th>
             <th>Type</th>
             <th>Format</th>
             <th>Unit</th>
@@ -31,6 +32,7 @@
             <tr>
               <td><%= field['id'] %></td>
               <td><%= field['label'] %></td>
+              <td><%= field['description'] %></td>
               <td><%= field['type'] %></td>
               <td><%= field['format'] %></td>
               <td><%= field['unit']['id'] if field['unit'] %></td>
@@ -74,6 +76,7 @@
       <ul class='unstyled'>
         <% @repo.commits.each do |commit| %>
           <li>
+            <%= commit.inspect %>
             <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:long),
              "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
           </li>
