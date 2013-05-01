@@ -10,8 +10,10 @@
     <dl class='dl-horizontal'>
       <dt>Format</dt>
       <dd><span class='label label-success'><%= @repo.format %></label></dd>
-      <dt>License</dt>
-      <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
+      <% if @repo.metadata['licenses'] && @repo.metadata['licenses'][0] %>
+        <dt>License</dt>
+        <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
+      <% end %>
     </dl>
     
     <% @repo.metadata['resources'].each do |resource| %>
