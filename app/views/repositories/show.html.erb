@@ -20,6 +20,10 @@
     
       <h3><%= resource['path'] %></h3>
 
+      <% if resource ['description'] %>
+        <p><%= resource ['description']%></p>
+      <% end %>
+
       <% if resource['schema'] %>
         <table class='table table-striped'>
           <tr>
