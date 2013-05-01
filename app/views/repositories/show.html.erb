@@ -98,7 +98,7 @@
           <li>
             <%= link_to commit['commit']['message'],
              "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
-            <br/><small class='pull-right'><%= DateTime.parse(commit['commit']['committer']['date']).to_s(:long) %></small>
+            <br/><small class='pull-right'><%= commit['commit']['committer']['name']%>, <%= DateTime.parse(commit['commit']['committer']['date']).to_s(:long) %></small>
           </li>
         <% end %>
       </ul>
