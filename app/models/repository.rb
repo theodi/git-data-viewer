@@ -52,6 +52,10 @@ class Repository < ActiveRecord::Base
       end
     end
   end
+  
+  def maintainers
+    metadata && metadata['maintainers'] ? metadata['maintainers'] : []
+  end
 
   def headers
     if metadata

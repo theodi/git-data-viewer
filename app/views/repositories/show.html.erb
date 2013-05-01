@@ -14,6 +14,20 @@
         <dt>License</dt>
         <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
       <% end %>
+      <% unless @repo.maintainers.empty? %>
+        <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
+        <dd>
+          <% @repo.maintainers.each do |m| %>
+            <% if m['web'] %>
+              <%= link_to m['name'], m['web']%>
+            <% elsif m['email'] %>
+              <%= mail_to m['name'], m['email']%>
+            <% else %>
+              <%= m['name'] %>
+            <% end %>
+          <% end %>
+        </dd>
+      <% end %>
     </dl>
     
     <% @repo.metadata['resources'].each do |resource| %>
