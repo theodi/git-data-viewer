@@ -1,11 +1,13 @@
 class RepositoriesController < ApplicationController
   
   def index
-    @repositories = [
-      Repository.new(uri: "https://github.com/theodi/github-viewer-test-data.git"),
-      Repository.new(uri: "git://github.com/datasets/house-prices-uk.git"),
-      Repository.new(uri: "git://github.com/datasets/gdp-uk.git")
-    ]
+    @repositories = %w{
+      git://github.com/datasets/house-prices-uk.git
+      git://github.com/datasets/gdp-uk.git
+      git://github.com/datasets/cofog.git
+      https://github.com/theodi/github-viewer-test-data.git
+    }.map{|uri| Repository.new(uri: uri)}
+    
   end
   
   def show
