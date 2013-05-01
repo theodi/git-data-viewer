@@ -62,8 +62,35 @@
           <% end %>
         </dd>
       <% end %>
+
+      <% if @repo.metadata['keywords'] %>
+        <dt>Keywords</dt>
+        <dd>
+          <ul class='inline'>
+            <% @repo.metadata['keywords'].each do |keyword| %>
+              <li><span class='label'><%= keyword%></span></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
       
     </dl>
+    
+    <% if @repo.metadata['sources'] %>
+      <h4>Sources</h4>
+      <ul>
+        <% @repo.metadata['sources'].each do |source| %>
+          <li>
+            <% if source['web'] %>
+              <%= link_to source['name'], source['web']%>
+            <% else %>
+              <%= source['name'] %>
+            <% end %>            
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    
     
     <% @repo.metadata['resources'].each do |resource| %>
     
