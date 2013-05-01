@@ -8,10 +8,16 @@
     </p>
 
     <dl class='dl-horizontal'>
-      <% if @repo.metadata['licenses'] && @repo.metadata['licenses'][0] %>
-        <dt>License</dt>
-        <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
+
+      <% unless @repo.licenses.empty? %>
+        <dt><%= 'License'.pluralize(@repo.licenses.length) %></dt>
+        <dd>
+          <% @repo.licenses.each do |l| %>
+            <%= link_to t(l['id']), l['url']%>
+          <% end %>
+        </dd>
       <% end %>
+
       <% unless @repo.maintainers.empty? %>
         <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
         <dd>
