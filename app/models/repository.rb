@@ -73,6 +73,12 @@ class Repository < ActiveRecord::Base
     end
   end  
 
+  def dialect
+    metadata['resources'][0]['dialect'] || {
+      "delimiter" => ","
+    }
+  end
+
   def format
     @format ||= begin
       if metadata
@@ -104,7 +110,11 @@ class Repository < ActiveRecord::Base
     @data ||= begin
       if data_url
         datafile = Net::HTTP.get(URI.parse(data_url))
-        CSV.parse(datafile, :headers => true)
+        CSV.parse(
+          datafile, 
+          :headers => true,
+          :col_sep => dialect["delimiter"]
+        )
       else
         nil
       end
