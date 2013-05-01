@@ -83,17 +83,23 @@ class Repository < ActiveRecord::Base
       end
     end
   end
-    
-  def data
-    @data ||= begin 
+  
+  def data_url
+    @data_url ||= begin
       url = nil
       if metadata && metadata['resources'][0]['path'].is_a?(String)
         url = "https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{metadata['resources'][0]['path']}"
       elsif metadata && metadata['resources'][0]['url'].is_a?(String)
         url = metadata['resources'][0]['url']
       end
-      if url
-        datafile = Net::HTTP.get(URI.parse(url))
+      url
+    end
+  end
+  
+  def data
+    @data ||= begin
+      if data_url
+        datafile = Net::HTTP.get(URI.parse(data_url))
         CSV.parse(datafile, :headers => true)
       else
         nil
