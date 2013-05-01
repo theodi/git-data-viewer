@@ -32,6 +32,22 @@
           <% end %>
         </dd>
       <% end %>
+      
+      <% unless @repo.publishers.empty? %>
+        <dt><%= 'Publisher'.pluralize(@repo.publishers.length) %></dt>
+        <dd>
+          <% @repo.publishers.each do |m| %>
+            <% if m['web'] %>
+              <%= link_to m['name'], m['web']%>
+            <% elsif m['email'] %>
+              <%= mail_to m['name'], m['email']%>
+            <% else %>
+              <%= m['name'] %>
+            <% end %>
+          <% end %>
+        </dd>
+      <% end %>
+
     </dl>
     
     <% @repo.metadata['resources'].each do |resource| %>

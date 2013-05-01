@@ -57,6 +57,10 @@ class Repository < ActiveRecord::Base
     metadata && metadata['maintainers'] ? metadata['maintainers'] : []
   end
 
+  def publishers
+    metadata && metadata['publishers'] ? metadata['publishers'] : []
+  end
+
   def licenses
     metadata && metadata['licenses'] ? metadata['licenses'] : []
   end
