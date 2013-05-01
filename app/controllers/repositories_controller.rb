@@ -2,6 +2,7 @@ class RepositoriesController < ApplicationController
   
   def index
     @repositories = %w{
+      git://github.com/datasets/population.git
       git://github.com/datasets/house-prices-uk.git
       git://github.com/datasets/gdp-uk.git
       git://github.com/datasets/cofog.git
