@@ -1,6 +1,9 @@
 GithubViewer::Application.routes.draw do
 
-  resources :repositories
   root "repositories#index"
+
+  get "/repositories" => "repositories#index"
+  get "/repositories/:uri" => "repositories#show", :as => :repository, :constraints => { uri: /[^\/]+/ }
+
 
 end

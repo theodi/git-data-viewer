@@ -1,6 +1,7 @@
 require 'net/http'
 require 'csv'
 require 'uri'
+require 'cgi'
 
 class Repository < ActiveRecord::Base
 
@@ -12,6 +13,10 @@ class Repository < ActiveRecord::Base
       path_without_extension = uri.path.rpartition('.')[0]
       [uri.host, path_without_extension].join('')
     end
+  end
+  
+  def to_param
+    CGI.escape(@uri).gsub('.','%2E')
   end
   
   def hosted_by_github?
