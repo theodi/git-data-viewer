@@ -19,6 +19,10 @@ class Repository < ActiveRecord::Base
     CGI.escape(@uri).gsub('.','%2E')
   end
   
+  def supported?
+    hosted_by_github? && metadata
+  end
+  
   def hosted_by_github?
     uri =~ /\Ahttps?:\/\/github\.com\//
   end
