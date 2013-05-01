@@ -9,8 +9,7 @@ class RepositoriesController < ApplicationController
   end
   
   def show
-    uri = "https://github.com/#{params[:uri]}.git"
-    @repo = Repository.new(uri: uri)
+    @repo = Repository.new(uri: params[:uri])
   end
   
 end
