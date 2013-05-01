@@ -16,7 +16,7 @@
     
     <% @repo.metadata['resources'].each do |resource| %>
     
-      <h3></h3>
+      <h3><%= resource['path'] %></h3>
 
       <table class='table table-striped'>
         <tr>
@@ -36,8 +36,7 @@
   
       </table>
 
-
-      <h3>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h3>
+      <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
       <table class='table table-striped'>
         <tr>
           <% @repo.headers.each do |header| %>
