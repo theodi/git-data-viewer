@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
 //= require turbolinks
+//= require underscore
+//= require backbone
+//= require mustache
+//= require bootstrap.min
+//= require recline
 //= require_tree .

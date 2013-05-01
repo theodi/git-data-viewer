@@ -30,7 +30,7 @@
       <% end %>
     </dl>
     
-    <% @repo.metadata['resources'].each do |resource| %>
+    <% @repo.metadata['resources'].each_with_index do |resource, index| %>
     
       <h3><%= resource['path'] %></h3>
 
@@ -63,21 +63,21 @@
       <% end %>
 
       <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
-      <table class='table table-striped'>
-        <tr>
-          <% @repo.headers.each do |header| %>
-            <th><%= header %></th>
-          <% end %>
-        </tr>
-        <% @preview_data.each do |row| %>
-          <tr>
-            <% @repo.headers.each do |header| %>
-              <td><%= row[header] %></td>
-            <% end %>
-          </tr>
-        <% end %>
-  
-      </table>
+      <div id="mygrid-<%= index %>" style="height: 400px"></div>
+      <script>
+      var data = <%= @preview_data.map{|x| x.to_hash}.to_json.html_safe %>;
+      var dataset = new recline.Model.Dataset({
+        records: data
+      });
+      var $el = $('#mygrid-<%= index %>');
+      var grid = new recline.View.Grid({
+        model: dataset,
+        el: $el,
+        edit: false
+      });
+      grid.visible = true;
+      grid.render();
+      </script>
   
     <% end %>
     
