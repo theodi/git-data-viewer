@@ -24,7 +24,7 @@ class Repository < ActiveRecord::Base
   end
   
   def hosted_by_github?
-    uri =~ /\Ahttps?:\/\/github\.com\//
+    (@uri =~ /\A(git|https?):\/\/github\.com\//).present?
   end
 
   def github_user_name
