@@ -18,25 +18,27 @@
     
       <h3><%= resource['path'] %></h3>
 
-      <table class='table table-striped'>
-        <tr>
-          <th>ID</th>
-          <th>Label</th>
-          <th>Type</th>
-          <th>Format</th>
-          <th>Unit</th>
-        </tr>
-        <% resource['schema']['fields'].each do |field| %>
+      <% if resource['schema'] %>
+        <table class='table table-striped'>
           <tr>
-            <td><%= field['id'] %></td>
-            <td><%= field['label'] %></td>
-            <td><%= field['type'] %></td>
-            <td><%= field['format'] %></td>
-            <td><%= field['unit']['id'] if field['unit'] %></td>
+            <th>ID</th>
+            <th>Label</th>
+            <th>Type</th>
+            <th>Format</th>
+            <th>Unit</th>
           </tr>
-        <% end %>
+          <% resource['schema']['fields'].each do |field| %>
+            <tr>
+              <td><%= field['id'] %></td>
+              <td><%= field['label'] %></td>
+              <td><%= field['type'] %></td>
+              <td><%= field['format'] %></td>
+              <td><%= field['unit']['id'] if field['unit'] %></td>
+            </tr>
+          <% end %>
   
-      </table>
+        </table>
+      <% end %>
 
       <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
       <table class='table table-striped'>
