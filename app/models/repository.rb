@@ -1,20 +1,29 @@
 require 'net/http'
 require 'csv'
+require 'uri'
 
 class Repository < ActiveRecord::Base
 
-  attr_accessor :url
+  attr_accessor :uri
+  
+  def stripped_uri
+    @stripped_uri ||= begin
+      uri = URI.parse(@uri)
+      path_without_extension = uri.path.rpartition('.')[0]
+      [uri.host, path_without_extension].join('')
+    end
+  end
   
   def hosted_by_github?
-    url =~ /\Ahttps?:\/\/github\.com\//
+    uri =~ /\Ahttps?:\/\/github\.com\//
   end
 
   def github_user_name
-    @github_user_name ||= hosted_by_github? ? url.split('/')[-2] : nil
+    @github_user_name ||= hosted_by_github? ? uri.split('/')[-2] : nil
   end
   
   def github_repository_name
-    @github_repository_name ||= hosted_by_github? ? url.split('/')[-1].split('.')[0] : nil
+    @github_repository_name ||= hosted_by_github? ? uri.split('/')[-1].split('.')[0] : nil
   end
 
   def repository
