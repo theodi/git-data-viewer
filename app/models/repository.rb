@@ -54,7 +54,15 @@ class Repository < ActiveRecord::Base
   end
 
   def headers
-    @headers ||= metadata ? metadata['resources'][0]['schema']['fields'].map{|x| x['id']} : []
+    if metadata
+      if metadata['resources'][0]['schema']
+        metadata['resources'][0]['schema']['fields'].map{|x| x['id']}
+      else
+        data.headers
+      end
+    else
+      []
+    end
   end  
 
   def format
