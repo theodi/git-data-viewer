@@ -23,6 +23,7 @@
           <th>ID</th>
           <th>Label</th>
           <th>Type</th>
+          <th>Format</th>
           <th>Unit</th>
         </tr>
         <% resource['schema']['fields'].each do |field| %>
@@ -30,6 +31,7 @@
             <td><%= field['id'] %></td>
             <td><%= field['label'] %></td>
             <td><%= field['type'] %></td>
+            <td><%= field['format'] %></td>
             <td><%= field['unit']['id'] if field['unit'] %></td>
           </tr>
         <% end %>
