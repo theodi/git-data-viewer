@@ -79,12 +79,12 @@
       </div>
 
       <h3>Changes</h3>
-      <ul class='unstyled'>
+      <ul class='unstyled' id='commits'>
         <% @repo.commits.each do |commit| %>
           <li>
-            <%= commit.inspect %>
-            <%= link_to DateTime.parse(commit['commit']['committer']['date']).to_s(:long),
+            <%= link_to commit['commit']['message'],
              "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
+            <br/><small class='pull-right'><%= DateTime.parse(commit['commit']['committer']['date']).to_s(:long) %></small>
           </li>
         <% end %>
       </ul>
