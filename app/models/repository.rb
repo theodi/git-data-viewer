@@ -45,7 +45,7 @@ class Repository < ActiveRecord::Base
 
   def metadata
     @metadata ||= begin
-      if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/datapackage.json"))
+      if json = Net::HTTP.get(URI.parse(uri_for_file("datapackage.json")))
         JSON.parse(json)
       else
         nil
@@ -88,7 +88,7 @@ class Repository < ActiveRecord::Base
     @data_url ||= begin
       url = nil
       if metadata && metadata['resources'][0]['path'].is_a?(String)
-        url = "https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{metadata['resources'][0]['path']}"
+        url = uri_for_file(metadata['resources'][0]['path'])
       elsif metadata && metadata['resources'][0]['url'].is_a?(String)
         url = metadata['resources'][0]['url']
       end
@@ -105,6 +105,12 @@ class Repository < ActiveRecord::Base
         nil
       end
     end
+  end
+
+  private
+  
+  def uri_for_file(path)
+    "https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{path}"
   end
 
 end
