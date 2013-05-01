@@ -18,21 +18,6 @@
         </dd>
       <% end %>
 
-      <% unless @repo.maintainers.empty? %>
-        <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
-        <dd>
-          <% @repo.maintainers.each do |m| %>
-            <% if m['web'] %>
-              <%= link_to m['name'], m['web']%>
-            <% elsif m['email'] %>
-              <%= mail_to m['name'], m['email']%>
-            <% else %>
-              <%= m['name'] %>
-            <% end %>
-          <% end %>
-        </dd>
-      <% end %>
-      
       <% unless @repo.publishers.empty? %>
         <dt><%= 'Publisher'.pluralize(@repo.publishers.length) %></dt>
         <dd>
@@ -40,7 +25,7 @@
             <% if m['web'] %>
               <%= link_to m['name'], m['web']%>
             <% elsif m['email'] %>
-              <%= mail_to m['name'], m['email']%>
+              <%= mail_to m['email'], m['name']%>
             <% else %>
               <%= m['name'] %>
             <% end %>
@@ -48,6 +33,36 @@
         </dd>
       <% end %>
 
+      <% unless @repo.maintainers.empty? %>
+        <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
+        <dd>
+          <% @repo.maintainers.each do |m| %>
+            <% if m['web'] %>
+              <%= link_to m['name'], m['web']%>
+            <% elsif m['email'] %>
+              <%= mail_to m['email'], m['name']%>
+            <% else %>
+              <%= m['name'] %>
+            <% end %>
+          <% end %>
+        </dd>
+      <% end %>
+      
+      <% unless @repo.contributors.empty? %>
+        <dt><%= 'Contributor'.pluralize(@repo.contributors.length) %></dt>
+        <dd>
+          <% @repo.contributors.each do |m| %>
+            <% if m['web'] %>
+              <%= link_to m['name'], m['web']%>
+            <% elsif m['email'] %>
+              <%= mail_to m['email'], m['name']%>
+            <% else %>
+              <%= m['name'] %>
+            <% end %>
+          <% end %>
+        </dd>
+      <% end %>
+      
     </dl>
     
     <% @repo.metadata['resources'].each do |resource| %>

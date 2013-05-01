@@ -65,6 +65,10 @@ class Repository < ActiveRecord::Base
     metadata && metadata['licenses'] ? metadata['licenses'] : []
   end
 
+  def contributors
+    metadata && metadata['contributors'] ? metadata['contributors'] : []
+  end
+
   def headers
     if metadata
       if metadata['resources'][0]['schema']
