@@ -11,5 +11,9 @@ class RepositoriesController < ApplicationController
   def show
     @repo = Repository.new(uri: params[:uri])
   end
+
+  def create
+    redirect_to repository_path(Repository.new(uri: params[:uri]))
+  end
   
 end

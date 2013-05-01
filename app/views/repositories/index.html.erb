@@ -1,4 +1,16 @@
-<h1>Repositories</h1>
+<h1>Enter a dataset URL</h1>
+
+<%= form_tag create_repository_path, :class => 'form-search' do %>
+  <%= text_field_tag :uri, '', :class => 'input-xxlarge search-query', :placeholder => @repositories.first.uri, :required => 'required' %>
+  <%= submit_tag 'Go', :class => 'btn' %>
+<% end %>
+<small>
+  Currently we only support datasets that conform to the 
+  <a href='http://www.dataprotocols.org/en/latest/data-packages.html'>DataPackage</a>
+  spec, and that are hosted on GitHub.
+</small>
+
+<h2>Or choose an example</h2>
 
 <ul>
   <% @repositories.each do |repo| %>
