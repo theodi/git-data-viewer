@@ -66,7 +66,18 @@ class Repository < ActiveRecord::Base
   end  
 
   def format
-    @format ||= metadata && metadata['resources'][0]['path'].is_a?(String) ? metadata['resources'][0]['path'].split('.').last.upcase : nil
+    @format ||= begin
+      if metadata
+        f = metadata['resources'][0]['format']
+        if f.nil?
+          f = metadata['resources'][0]['path'].is_a?(String) ? metadata['resources'][0]['path'].split('.').last.upcase : nil
+        end
+        f.upcase! unless f.nil?
+        f
+      else
+        nil
+      end
+    end
   end
     
   def data
