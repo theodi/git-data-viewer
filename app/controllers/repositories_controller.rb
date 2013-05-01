@@ -4,6 +4,7 @@ class RepositoriesController < ApplicationController
     @repositories = %w{
       git://github.com/datasets/population.git
       git://github.com/datasets/house-prices-uk.git
+      https://github.com/datasets/house-prices-us.git
       git://github.com/datasets/gdp-uk.git
       git://github.com/datasets/cofog.git
       https://github.com/theodi/github-viewer-test-data.git
