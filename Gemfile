@@ -13,6 +13,7 @@ group :production do
   gem "foreman"
   gem "thin"
   gem "mysql2"
+  gem "airbrake"
 end
 
 # Gems used only for assets and not required
