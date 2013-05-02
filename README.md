@@ -2,14 +2,14 @@
 
 An experiment in displaying Open Data stored in Github in a nice way for non-developers.
 
-Relies on a variant of Andrew Berkeley's [calcJSON](https://github.com/spatchcock/calcJSON) format to load metadata from repository.
+Relies on a loading metadata from a [DataPackage](http://www.dataprotocols.org/en/latest/data-packages.html) file contained in the repository.
 
 For more details, see the [sample repository](https://github.com/theodi/github-viewer-test-data).
 
 Requirements
 ------------
 
-This uses Ruby 2 and Rails 4 beta 1. Caveat Emptor.
+This uses Ruby 2 and Rails 4 rc 1. Caveat Emptor.
 
 License
 -------
