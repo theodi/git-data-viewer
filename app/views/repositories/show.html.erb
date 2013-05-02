@@ -153,10 +153,20 @@
   <div class='span3'>
     <% if @repo.hosted_by_github? %>
       <div class='well'>
-        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>/archive/master.zip' class='btn btn-primary'>
-          <i class='icon icon-white icon-download-alt'></i>
-          Download Latest
-        </a>
+        <div class='actionbutton'>
+          <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>/archive/master.zip' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <% feed = "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commits/master.atom" %>
+          <%= auto_discovery_link_tag :rss, feed %>
+          <a href='<%= feed %>' class='btn btn-primary btn-block'>
+            <i class='icon-rss'></i>
+            Subscribe to updates
+          </a>
+        </div>
       </div>
 
       <h3>Changes</h3>
