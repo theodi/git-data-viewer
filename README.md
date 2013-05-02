@@ -1,5 +1,9 @@
 # Github Viewer
 
+[![Build Status](http://jenkins.theodi.org/job/git-data-viewer-build-master/badge/icon)](http://jenkins.theodi.org/job/git-data-viewer-build-master/)
+[![Dependency Status](https://gemnasium.com/theodi/git-data-viewer.png)](https://gemnasium.com/theodi/git-data-viewer)
+[![Code Climate](https://codeclimate.com/github/theodi/git-data-viewer.png)](https://codeclimate.com/github/theodi/git-data-viewer)
+
 An experiment in displaying Open Data stored in Github in a nice way for non-developers.
 
 Relies on a loading metadata from a [DataPackage](http://www.dataprotocols.org/en/latest/data-packages.html) file contained in the repository.
