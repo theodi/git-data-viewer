@@ -130,6 +130,7 @@
       <% end %>
 
       <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
+      <div class='sample-data'>
       <table class='table table-striped'>
         <tr>
           <% @repo.headers.each do |header| %>
@@ -145,7 +146,7 @@
         <% end %>
   
       </table>
-  
+      </div>
     <% end %>
     
   </div>
