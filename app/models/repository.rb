@@ -1,4 +1,3 @@
-require 'net/http'
 require 'csv'
 require 'uri'
 require 'cgi'
