@@ -35,10 +35,6 @@ class Repository < ActiveRecord::Base
     @github_repository_name ||= hosted_by_github? ? uri.split('/')[-1].split('.')[0] : nil
   end
 
-  def repository
-    @repository ||= $github.repos.get github_user_name, github_repository_name
-  end
-
   def commits
     @commits ||= begin
       # Get a log for each resource in the local repo
