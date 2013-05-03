@@ -2,7 +2,7 @@
   <p>
     This is an Open Data Institute experiment to create a friendly viewer for datasets stored in git repositories.
     Currently it supports datasets that use the <a href='http://www.dataprotocols.org/en/latest/data-packages.html'>DataPackage</a>
-    metadata format, and that are stored on <a href='http://github.com'>GitHub</a>.
+    metadata format.
   </p>
   <p>
     Comments and feedback are most welcome - if you have an idea, or find a bug or dataset that should work but 
@@ -11,7 +11,7 @@
   </p>
 </div>
 
-<h1>Enter a dataset URL</h1>
+<h1>Enter the public clone URL of a repository:</h1>
 
 <%= form_tag create_repository_path, :class => 'form-search' do %>
   <%= text_field_tag :uri, '', :class => 'input-xxlarge search-query', :placeholder => @repositories.first.uri, :required => 'required' %>
@@ -20,7 +20,7 @@
 <small>
   Currently we only support datasets that conform to the 
   <a href='http://www.dataprotocols.org/en/latest/data-packages.html'>DataPackage</a>
-  spec, and that are hosted on GitHub.
+  spec.
 </small>
 
 <h2>Or choose an example</h2>

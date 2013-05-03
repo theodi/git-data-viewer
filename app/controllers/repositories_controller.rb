@@ -8,8 +8,8 @@ class RepositoriesController < ApplicationController
       https://github.com/datasets/house-prices-us.git
       git://github.com/datasets/gdp-uk.git
       git://github.com/datasets/cofog.git
-      https://github.com/theodi/github-viewer-test-data.git
       https://github.com/theodi/hot-drinks.git
+      https://floppy@bitbucket.org/floppy/hot-drinks.git
     }.map{|uri| Repository.new(uri: uri)}
     
   end
