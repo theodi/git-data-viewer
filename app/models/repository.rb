@@ -41,7 +41,17 @@ class Repository < ActiveRecord::Base
 
   def commits
     @commits ||= begin
-      repository.log
+      # Get a log for each resource in the local repo
+      logs = metadata['resources'].map do |resource|
+        if resource['path']
+          log = repository.log.path(resource['path'])
+          log.map{|x| x}
+        else
+          []
+        end
+      end
+      # combine all logs, make unique, and re-sort in date order
+      logs.flatten.uniq.sort_by{|x| x.committer.date}.reverse
     end
   end
 
