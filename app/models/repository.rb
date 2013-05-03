@@ -1,7 +1,7 @@
-require 'net/http'
 require 'csv'
 require 'uri'
 require 'cgi'
+require 'git'
 
 class Repository < ActiveRecord::Base
 
@@ -14,38 +14,42 @@ class Repository < ActiveRecord::Base
       [uri.host, path_without_extension].join('')
     end
   end
-  
+
   def to_param
     CGI.escape(@uri).gsub('.','%2E')
   end
   
   def supported?
-    hosted_by_github? && metadata
+    metadata
   end
   
   def hosted_by_github?
     (@uri =~ /\A(git|https?):\/\/github\.com\//).present?
   end
 
-  def github_user_name
-    @github_user_name ||= hosted_by_github? ? uri.split('/')[-2] : nil
-  end
-  
-  def github_repository_name
-    @github_repository_name ||= hosted_by_github? ? uri.split('/')[-1].split('.')[0] : nil
-  end
-
-  def repository
-    @repository ||= $github.repos.get github_user_name, github_repository_name
+  def github_path(path = '')
+    hosted_by_github? ? "https://github.com/#{github_user_name}/#{github_repository_name}/#{path}" : nil
   end
 
   def commits
-    @commits ||= $github.repos.commits.all github_user_name, github_repository_name
+    @commits ||= begin
+      # Get a log for each resource in the local repo
+      logs = metadata['resources'].map do |resource|
+        if resource['path']
+          log = repository.log.path(resource['path'])
+          log.map{|x| x}
+        else
+          []
+        end
+      end
+      # combine all logs, make unique, and re-sort in date order
+      logs.flatten.uniq.sort_by{|x| x.committer.date}.reverse
+    end
   end
 
   def metadata
     @metadata ||= begin
-      if json = Net::HTTP.get(URI.parse(uri_for_file("datapackage.json")))
+      if json = load_from_working_copy("datapackage.json")
         JSON.parse(json)
       else
         nil
@@ -102,22 +106,14 @@ class Repository < ActiveRecord::Base
     end
   end
   
-  def data_url
-    @data_url ||= begin
-      url = nil
-      if metadata && metadata['resources'][0]['path'].is_a?(String)
-        url = uri_for_file(metadata['resources'][0]['path'])
-      elsif metadata && metadata['resources'][0]['url'].is_a?(String)
-        url = metadata['resources'][0]['url']
-      end
-      url
-    end
-  end
-  
   def data
     @data ||= begin
-      if data_url
-        datafile = Net::HTTP.get(URI.parse(data_url))
+      if metadata && metadata['resources'][0]['path'].is_a?(String)
+        datafile = load_from_working_copy metadata['resources'][0]['path']
+      elsif metadata && metadata['resources'][0]['url'].is_a?(String)
+        datafile = Net::HTTP.get(URI.parse(metadata['resources'][0]['url']))
+      end
+      if datafile
         CSV.parse(
           datafile, 
           :headers => true,
@@ -131,8 +127,36 @@ class Repository < ActiveRecord::Base
 
   private
   
-  def uri_for_file(path)
-    "https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{path}"
+  def load_from_working_copy(path)
+    # Make sure we have a working copy
+    repository
+    # read file 
+    File.read(File.join(working_copy_path, path))
+  end
+  
+  def working_copy_path
+    # Create holding directory
+    FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'repositories'))
+    # generate working copy dir
+    File.join(Rails.root, 'tmp', 'repositories', stripped_uri.gsub('/','-'))
+  end
+
+  def repository
+    @repository ||= begin
+      repo = Git.open(working_copy_path)
+      repo.pull("origin", "master")
+      repo
+    rescue ArgumentError
+      repo = Git.clone(@uri, working_copy_path)
+    end
+  end
+
+  def github_user_name
+    @github_user_name ||= hosted_by_github? ? uri.split('/')[-2] : nil
+  end
+  
+  def github_repository_name
+    @github_repository_name ||= hosted_by_github? ? uri.split('/')[-1].split('.')[0] : nil
   end
 
 end
