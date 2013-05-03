@@ -42,15 +42,13 @@ class Repository < ActiveRecord::Base
 
   def commits
     @commits ||= begin
-      repo = update_working_copy
-      repo.log
+      repository.log
     end
   end
 
   def metadata
     @metadata ||= begin
-      update_working_copy
-      if json = File.read(File.join(working_copy, "datapackage.json"))
+      if json = load_from_working_copy("datapackage.json")
         JSON.parse(json)
       else
         nil
@@ -110,7 +108,7 @@ class Repository < ActiveRecord::Base
   def data
     @data ||= begin
       if metadata && metadata['resources'][0]['path'].is_a?(String)
-        datafile = File.read(File.join(working_copy, metadata['resources'][0]['path']))
+        datafile = load_from_working_copy metadata['resources'][0]['path']
       elsif metadata && metadata['resources'][0]['url'].is_a?(String)
         datafile = Net::HTTP.get(URI.parse(metadata['resources'][0]['url']))
       end
@@ -128,21 +126,28 @@ class Repository < ActiveRecord::Base
 
   private
   
-  def working_copy
+  def load_from_working_copy(path)
+    # Make sure we have a working copy
+    repository
+    # read file 
+    File.read(File.join(working_copy_path, path))
+  end
+  
+  def working_copy_path
     # Create holding directory
     FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'repositories'))
     # generate working copy dir
     File.join(Rails.root, 'tmp', 'repositories', stripped_uri.gsub('/','-'))
   end
 
-  def update_working_copy
-    begin
-      repo = Git.open(working_copy)
+  def repository
+    @repository ||= begin
+      repo = Git.open(working_copy_path)
       repo.pull("origin", "master")
+      repo
     rescue ArgumentError
-      repo = Git.clone(@uri, working_copy)
+      repo = Git.clone(@uri, working_copy_path)
     end
-    repo
   end
 
 end
