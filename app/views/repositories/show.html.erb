@@ -174,9 +174,9 @@
       <ul class='unstyled' id='commits'>
         <% @repo.commits.each do |commit| %>
           <li>
-            <%= link_to commit['commit']['message'],
-             "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
-            <br/><small class='pull-right'><%= commit['commit']['committer']['name']%>, <%= DateTime.parse(commit['commit']['committer']['date']).to_s(:long) %></small>
+            <%= link_to commit.message,
+             "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit.sha}" %>
+            <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
           </li>
         <% end %>
       </ul>

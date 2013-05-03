@@ -41,7 +41,10 @@ class Repository < ActiveRecord::Base
   end
 
   def commits
-    @commits ||= $github.repos.commits.all github_user_name, github_repository_name
+    @commits ||= begin
+      repo = update_working_copy
+      repo.log
+    end
   end
 
   def metadata
