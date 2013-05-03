@@ -20,7 +20,7 @@ class Repository < ActiveRecord::Base
   end
   
   def supported?
-    hosted_by_github? && metadata
+    metadata
   end
   
   def hosted_by_github?
