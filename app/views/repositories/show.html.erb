@@ -155,13 +155,13 @@
     <% if @repo.hosted_by_github? %>
       <div class='well'>
         <div class='actionbutton'>
-          <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>/archive/master.zip' class='btn btn-primary btn-block'>
+          <a href='<%= @repo.github_path("archive/master.zip") %>' class='btn btn-primary btn-block'>
             <i class='icon-cloud-download'></i>
             Download Latest
           </a>
         </div>
         <div class='actionbutton'>
-          <% feed = "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commits/master.atom" %>
+          <% feed = @repo.github_path("commits/master.atom") %>
           <%= auto_discovery_link_tag :rss, feed %>
           <a href='<%= feed %>' class='btn btn-primary btn-block'>
             <i class='icon-rss'></i>
@@ -169,19 +169,25 @@
           </a>
         </div>
       </div>
+    <% end %>
 
-      <h3>Changes</h3>
-      <ul class='unstyled' id='commits'>
-        <% @repo.commits.each do |commit| %>
-          <li>
-            <%= link_to commit.message,
-             "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit.sha}" %>
-            <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
-          </li>
-        <% end %>
-      </ul>
+    <h3>Changes</h3>
+    <ul class='unstyled' id='commits'>
+      <% @repo.commits.each do |commit| %>
+        <li>
+          <% if @repo.hosted_by_github? %>
+            <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
+          <% else %>
+            <%= commit.message %>
+          <% end %>
+          <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
+        </li>
+      <% end %>
+    </ul>
+    
+    <% if @repo.hosted_by_github? %>
       <p>
-        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>'>
+        <a href='<%= @repo.github_path %>'>
           View more on Github
         </a>
       </p>
