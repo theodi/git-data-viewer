@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+#ruby=ruby-2.0.0-p0
 #ruby-gemset=github-viewer
 
 gem 'rails', '4.0.0.rc1'
