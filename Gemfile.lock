@@ -30,7 +30,7 @@ GEM
       builder
       json
     arel (4.0.0)
-    atomic (1.1.8)
+    atomic (1.1.9)
     builder (3.1.4)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -76,7 +76,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     minitest (4.7.4)
-    multi_json (1.7.2)
+    multi_json (1.7.3)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
