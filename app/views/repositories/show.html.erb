@@ -152,7 +152,7 @@
   </div>
 
   <div class='span3'>
-    <% if @repo.hosted_by_github? %>
+    <% if @repo.host == :github %>
       <div class='well'>
         <div class='actionbutton'>
           <a href='<%= @repo.github_path("archive/master.zip") %>' class='btn btn-primary btn-block'>
@@ -175,7 +175,7 @@
     <ul class='unstyled' id='commits'>
       <% @repo.changelog.each do |commit| %>
         <li>
-          <% if @repo.hosted_by_github? %>
+          <% if @repo.host == :github %>
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
           <% else %>
             <%= commit.message %>
@@ -185,7 +185,7 @@
       <% end %>
     </ul>
     
-    <% if @repo.hosted_by_github? %>
+    <% if @repo.host == :github %>
       <p>
         <a href='<%= @repo.github_path %>'>
           View more on Github
