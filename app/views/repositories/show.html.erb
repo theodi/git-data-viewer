@@ -173,7 +173,7 @@
 
     <h3>Changes</h3>
     <ul class='unstyled' id='commits'>
-      <% @repo.commits.each do |commit| %>
+      <% @repo.changelog.each do |commit| %>
         <li>
           <% if @repo.hosted_by_github? %>
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
