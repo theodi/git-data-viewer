@@ -47,7 +47,13 @@ module OpenData
     end
 
     def licenses
-      metadata && metadata['licenses'] ? metadata['licenses'] : []
+      if metadata && metadata['licenses']
+        metadata['licenses'].map do |x| 
+          License.new(:id => x['id'], :uri => x['url'], :name => x['name'])
+        end
+      else
+        []
+      end
     end
 
     def contributors
