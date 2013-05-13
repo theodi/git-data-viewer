@@ -36,7 +36,7 @@ class OpenData::Dataset
 
   def metadata
     @metadata ||= begin
-      if json = load_from_working_copy("datapackage.json")
+      if json = load("datapackage.json")
         JSON.parse(json)
       else
         nil
@@ -96,7 +96,7 @@ class OpenData::Dataset
   def data
     @data ||= begin
       if metadata && metadata['resources'][0]['path'].is_a?(String)
-        datafile = load_from_working_copy metadata['resources'][0]['path']
+        datafile = load metadata['resources'][0]['path']
       elsif metadata && metadata['resources'][0]['url'].is_a?(String)
         datafile = Net::HTTP.get(URI.parse(metadata['resources'][0]['url']))
       end
@@ -114,7 +114,7 @@ class OpenData::Dataset
 
   private
   
-  def load_from_working_copy(path)
+  def load(path)
     # Make sure we have a working copy
     repository
     # read file 
