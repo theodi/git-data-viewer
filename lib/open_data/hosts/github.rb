@@ -5,7 +5,7 @@ module OpenData
     module Github
 
       def self.supported?(uri)
-        (uri =~ /\A(git|https?):\/\/github\.com\//).present?
+        uri =~ /\A(git|https?):\/\/github\.com\//
       end
 
       def host

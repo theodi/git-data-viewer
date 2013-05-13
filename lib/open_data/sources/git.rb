@@ -5,7 +5,7 @@ module OpenData
     module Git
   
       def self.supported?(uri)
-        (uri =~ /\A(git|https?):\/\/.*\.git\Z/).present?
+        uri =~ /\A(git|https?):\/\/.*\.git\Z/
       end
 
       def source
