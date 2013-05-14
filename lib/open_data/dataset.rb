@@ -19,6 +19,10 @@ module OpenData
       detect_publishing_format
     end
   
+    def supported?
+      source && host && publishing_format
+    end
+  
     def stripped_uri
       @stripped_uri ||= begin
         uri = URI.parse(@uri)

@@ -16,7 +16,7 @@ class RepositoriesController < ApplicationController
   
   def show
     @repo = Repository.new(uri: params[:uri])
-    render :not_supported and return unless @repo.publishing_format == :datapackage
+    render :not_supported and return unless @repo.supported?
     @preview_data = @repo.data.first(10)
   end
 
