@@ -150,6 +150,7 @@ GEM
     uglifier (2.1.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    yard (0.8.6.1)
 
 PLATFORMS
   ruby
@@ -171,3 +172,4 @@ DEPENDENCIES
   thin
   turbolinks
   uglifier (>= 1.0.3)
+  yard
