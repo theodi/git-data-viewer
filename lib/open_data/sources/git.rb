@@ -24,7 +24,7 @@ module OpenData
 
       protected
   
-      def load(path)
+      def load_file(path)
         # Make sure we have a working copy
         repository
         # read file 

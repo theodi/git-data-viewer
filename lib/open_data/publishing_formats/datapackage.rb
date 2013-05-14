@@ -7,7 +7,7 @@ module OpenData
       private
 
       def self.supported?(instance)
-        instance.send(:load, "datapackage.json")
+        instance.send(:load_file, "datapackage.json")
       rescue 
         false
       end
@@ -112,7 +112,7 @@ module OpenData
       
       def metadata
         @metadata ||= begin
-          if json = load("datapackage.json")
+          if json = load_file("datapackage.json")
             JSON.parse(json)
           else
             nil
