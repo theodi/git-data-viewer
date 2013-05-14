@@ -74,20 +74,20 @@
     <% end %>
     
     
-    <% @repo.metadata['resources'].each do |resource| %>
+    <% @repo.files.each do |file| %>
     
-      <h3><%= resource['path'] %></h3>
+      <h3><%= file.name %></h3>
 
       <dl class='dl-horizontal'>
         <dt>Format</dt>
-        <dd><span class='label label-success'><%= @repo.format %></label></dd>
+        <dd><span class='label label-success'><%= file.format %></label></dd>
       </dl>
 
-      <% if resource ['description'] %>
-        <p><%= resource ['description']%></p>
+      <% if file.description %>
+        <p><%= file.description %></p>
       <% end %>
 
-      <% if resource['schema'] %>
+      <% if file.schema %>
         <table class='table table-striped'>
           <tr>
             <th>ID</th>
@@ -97,7 +97,7 @@
             <th>Format</th>
             <th>Unit</th>
           </tr>
-          <% resource['schema']['fields'].each do |field| %>
+          <% file.schema['fields'].each do |field| %>
             <tr>
               <td><%= field['id'] %></td>
               <td><%= field['label'] %></td>
@@ -111,17 +111,18 @@
         </table>
       <% end %>
 
-      <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
+      <% preview_data = file.data.first(10) %>
+      <h4>Sample Data (<%= preview_data.length %> of <%= file.data.size %>)</h4>
       <div class='sample-data'>
       <table class='table table-striped'>
         <tr>
-          <% @repo.headers.each do |header| %>
+          <% file.headers.each do |header| %>
             <th><%= header %></th>
           <% end %>
         </tr>
-        <% @preview_data.each do |row| %>
+        <% preview_data.each do |row| %>
           <tr>
-            <% @repo.headers.each do |header| %>
+            <% file.headers.each do |header| %>
               <td><%= row[header] %></td>
             <% end %>
           </tr>
