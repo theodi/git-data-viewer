@@ -77,6 +77,27 @@ module OpenData
         end
       end
 
+      def changelog
+        @changelog ||= begin
+          if source == :git
+            # Get a log for each resource in the local repo
+            logs = metadata['resources'].map do |resource|
+              if resource['path']
+                log = repository.log.path(resource['path'])
+                # Convert to list of commits
+                log.map{|commit| commit}
+              else
+                []
+              end
+            end
+            # combine all logs, make unique, and re-sort in date order
+            logs.flatten.uniq.sort_by{|x| x.committer.date}.reverse
+          else
+            []
+          end
+        end
+      end
+
       private
       
       def metadata
