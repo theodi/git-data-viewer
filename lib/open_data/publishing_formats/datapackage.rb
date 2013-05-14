@@ -15,11 +15,15 @@ module OpenData
       end
 
       def maintainers
-        metadata['maintainers'] || []
+        (metadata['maintainers'] || []).map do |x|
+          Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
+        end
       end
 
       def publishers
-        metadata['publishers'] || []
+        (metadata['publishers'] || []).map do |x|
+          Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
+        end
       end
 
       def licenses
@@ -29,7 +33,9 @@ module OpenData
       end
 
       def contributors
-        metadata['contributors'] || []
+        (metadata['contributors'] || []).map do |x|
+          Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
+        end
       end
 
 
