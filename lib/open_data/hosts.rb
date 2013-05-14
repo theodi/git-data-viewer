@@ -4,6 +4,8 @@ module OpenData
   
   module Hosts
 
+    private
+
     def detect_host
       [
         OpenData::Hosts::Github

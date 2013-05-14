@@ -4,6 +4,8 @@ module OpenData
   
   module PublishingFormats
 
+    private
+
     def detect_publishing_format
       [
         OpenData::PublishingFormats::Datapackage

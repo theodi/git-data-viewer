@@ -4,9 +4,13 @@ module OpenData
     
     module Git
   
+      private
+  
       def self.supported?(uri)
         uri =~ /\A(git|https?):\/\/.*\.git\Z/
       end
+
+      public
 
       def source
         :git

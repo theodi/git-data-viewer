@@ -4,6 +4,8 @@ module OpenData
   
   module Sources
 
+    private
+
     def detect_source
       [
         OpenData::Sources::Git

@@ -4,16 +4,20 @@ module OpenData
     
     module Datapackage
 
+      private
+
       def self.supported?(instance)
         instance.send(:load, "datapackage.json")
       rescue 
         false
       end
 
+      public
+
       def publishing_format
         :datapackage
       end
-
+      
       def maintainers
         (metadata['maintainers'] || []).map do |x|
           Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])

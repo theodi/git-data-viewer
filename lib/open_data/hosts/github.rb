@@ -4,9 +4,13 @@ module OpenData
     
     module Github
 
+      private
+
       def self.supported?(uri)
         uri =~ /\A(git|https?):\/\/github\.com\//
       end
+      
+      public
 
       def host
         :github
