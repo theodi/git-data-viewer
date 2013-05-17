@@ -42,15 +42,15 @@ module OpenData
         end
       end
 
-      def files
-        metadata['resources'].map { |resource| Datafile.new(self, datapackage_resource: resource) }
+      def distributions
+        metadata['resources'].map { |resource| Distribution.new(self, datapackage_resource: resource) }
       end
   
       def changelog
         @changelog ||= begin
           if source == :git
             # Get a log for each file in the local repo
-            logs = files.map do |file|
+            logs = distributions.map do |file|
               if file.path
                 log = repository.log.path(file.path)
                 # Convert to list of commits

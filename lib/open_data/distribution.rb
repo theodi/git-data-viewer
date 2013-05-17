@@ -1,6 +1,6 @@
 module OpenData
 
-  class Datafile
+  class Distribution
 
     attr_accessor :format, :uri, :path, :description, :schema
 
