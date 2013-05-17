@@ -46,7 +46,7 @@ module OpenData
           repo.pull("origin", "master")
           repo
         rescue ArgumentError
-          repo = ::Git.clone(@uri, working_copy_path)
+          repo = ::Git.clone(@access_url, working_copy_path)
         end
       end  
   

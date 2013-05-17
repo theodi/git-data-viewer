@@ -10,7 +10,7 @@ module OpenData
       [
         OpenData::Sources::Git
       ].each do |source|
-        extend source if source.supported?(@uri)
+        extend source if source.supported?(@access_url)
       end
     end
 

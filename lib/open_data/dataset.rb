@@ -10,10 +10,11 @@ module OpenData
     include OpenData::Hosts
     include OpenData::PublishingFormats
   
-    attr_accessor :uri
+    attr_accessor :access_url
+    alias_method :uri, :access_url
 
     def initialize(options)
-      @uri = options[:uri]
+      @access_url = options[:access_url]
       detect_source
       detect_host
       detect_publishing_format

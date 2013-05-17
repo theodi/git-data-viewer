@@ -10,7 +10,7 @@ module OpenData
       [
         OpenData::Hosts::Github
       ].each do |host|
-        extend host if host.supported?(@uri)
+        extend host if host.supported?(@access_url)
       end
     end
 
