@@ -1,4 +1,4 @@
-module OpenData
+module DataKitten
 
   class Distribution
 

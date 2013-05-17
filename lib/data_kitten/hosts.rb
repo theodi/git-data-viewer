@@ -1,6 +1,6 @@
-require 'open_data/hosts/github'
+require 'data_kitten/hosts/github'
 
-module OpenData
+module DataKitten
   
   module Hosts
 
@@ -8,7 +8,7 @@ module OpenData
 
     def detect_host
       [
-        OpenData::Hosts::Github
+        DataKitten::Hosts::Github
       ].each do |host|
         extend host if host.supported?(@access_url)
       end

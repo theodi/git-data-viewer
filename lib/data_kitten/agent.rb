@@ -1,4 +1,4 @@
-module OpenData
+module DataKitten
 
   # A person or organisation.
   #

@@ -1,6 +1,6 @@
-require 'open_data/sources/git'
+require 'data_kitten/sources/git'
 
-module OpenData
+module DataKitten
   
   module Sources
 
@@ -8,7 +8,7 @@ module OpenData
 
     def detect_source
       [
-        OpenData::Sources::Git
+        DataKitten::Sources::Git
       ].each do |source|
         extend source if source.supported?(@access_url)
       end

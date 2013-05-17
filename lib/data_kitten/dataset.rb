@@ -1,8 +1,8 @@
-require 'open_data/sources'
-require 'open_data/hosts'
-require 'open_data/publishing_formats'
+require 'data_kitten/sources'
+require 'data_kitten/hosts'
+require 'data_kitten/publishing_formats'
 
-module OpenData
+module DataKitten
 
   # Represents a single dataset from some source (see {http://www.w3.org/TR/vocab-dcat/#class-dataset dcat:Dataset} 
   # for relevant vocabulary).
@@ -21,9 +21,9 @@ module OpenData
   #   
   class Dataset
 
-    include OpenData::Sources
-    include OpenData::Hosts
-    include OpenData::PublishingFormats
+    include DataKitten::Sources
+    include DataKitten::Hosts
+    include DataKitten::PublishingFormats
   
     # @!attribute access_url
     #   @return [String] the URL that gives access to the dataset
