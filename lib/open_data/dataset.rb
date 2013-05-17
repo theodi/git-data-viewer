@@ -118,7 +118,7 @@ module OpenData
 
     # A history of changes to the Dataset
     #
-    # @return [Array] An array of changes. Exact format depends on the source amd publishing format.
+    # @return [Array] An array of changes. Exact format depends on the source and publishing format.
     def changes
       []
     end
