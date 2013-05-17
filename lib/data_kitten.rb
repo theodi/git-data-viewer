@@ -20,5 +20,15 @@ require 'data_kitten/distribution'
 #
 # https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/67399f2b335ef62d562dc9eb41c0db16/tumblr_mmy9g7rA8M1s4aj1ho1_500.jpg
 #
+# @example Load a Dataset from a git repository
+#   dataset = Dataset.new(access_url: 'git://github.com/theodi/dataset-metadata-survey.git')
+#   dataset.supported?                # => true
+#   dataset.source                    # => :git
+#   dataset.host                      # => :github
+#   dataset.publishing_format         # => :datapackage
+#   dataset.distributions             # => [Distribution<#1>, Distribution<#2>]
+#   dataset.distributions[0].headers  # => ['col1', 'col2']
+#   dataset.distributions[0].data[0]  # => {'col1' => 'value_1', 'col2' => 'value_2'}
+
 module DataKitten
 end
