@@ -79,5 +79,49 @@ module OpenData
       nil
     end
 
+    # A list of maintainers
+    #
+    # @return [Array<Agent>] An array of maintainers, each as an Agent object.
+    def maintainers
+      []
+    end
+
+    # A list of publishers
+    #
+    # @return [Array<Agent>] An array of publishers, each as an Agent object.
+    def publishers
+      []
+    end
+
+    # A list of licenses
+    #
+    # @return [Array<License>] An array of licenses, each as a License object.
+    def licenses
+      []
+    end
+
+    # A list of contributors
+    #
+    # @return [Array<Agent>] An array of contributors to the dataset, each as an Agent object.
+    def contributors
+      []
+    end
+
+    # A list of distributions. Has aliases for popular alternative vocabularies.
+    #
+    # @return [Array<Distribution>] An array of Distribution objects.
+    def distributions
+      []
+    end
+    alias_method :files, :distributions
+    alias_method :resources, :distributions
+
+    # A history of changes to the Dataset
+    #
+    # @return [Array] An array of changes. Exact format depends on the source amd publishing format.
+    def changes
+      []
+    end
+
   end
 end
