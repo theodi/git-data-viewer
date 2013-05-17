@@ -2,6 +2,10 @@ module OpenData
 
   module PublishingFormats
     
+    # Datapackage metadata format module. Automatically mixed into {Dataset} for datasets that include a +datapackage.json+.
+    #
+    # @see Dataset
+    #
     module Datapackage
 
       private
@@ -14,38 +18,64 @@ module OpenData
 
       public
 
+      # The publishing format for the dataset.
+      # @return [Symbol] +:datapackage+
+      # @see Dataset#publishing_format
       def publishing_format
         :datapackage
       end
       
+      # A list of maintainers.
+      #
+      # @see Dataset#maintainers
       def maintainers
         (metadata['maintainers'] || []).map do |x|
           Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
         end
       end
 
+      # A list of publishers.
+      #
+      # @see Dataset#publishers
       def publishers
         (metadata['publishers'] || []).map do |x|
           Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
         end
       end
 
+      # A list of licenses.
+      #
+      # @see Dataset#licenses
       def licenses
         (metadata['licenses'] || []).map do |x| 
           License.new(:id => x['id'], :uri => x['url'], :name => x['name'])
         end
       end
 
+      # A list of contributors.
+      #
+      # @see Dataset#contributors
       def contributors
         (metadata['contributors'] || []).map do |x|
           Agent.new(:name => x['name'], :uri => x['web'], :email => x['email'])
         end
       end
 
+      # A list of distributions, referred to as +resources+ by Datapackage.
+      #
+      # @see Dataset#distributions
       def distributions
         metadata['resources'].map { |resource| Distribution.new(self, datapackage_resource: resource) }
       end
   
+      # A history of changes to the Dataset.
+      # 
+      # If {Dataset#source} is +:git+, this is the git changelog for the actual distribution files, rather
+      # then the full unfiltered log.
+      #
+      # @return [Array] An array of changes. Exact format depends on the source.
+      # 
+      # @see Dataset#changes
       def changes
         @changes ||= begin
           if source == :git

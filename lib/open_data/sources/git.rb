@@ -2,6 +2,10 @@ module OpenData
   
   module Sources
     
+    # Git source module. Automatically mixed into {Dataset} for datasets that are loaded from Git repositories.
+    #
+    # @see Dataset
+    #
     module Git
   
       private
@@ -12,10 +16,15 @@ module OpenData
 
       public
 
+      # The source type of the dataset.
+      # @return [Symbol] +:git+
+      # @see Dataset#source
       def source
         :git
       end
 
+      # A history of changes to the Dataset, taken from the full git changelog
+      # @see Dataset#changes
       def changes
         @changes ||= begin
           repository.log.map{|commit| commit}
