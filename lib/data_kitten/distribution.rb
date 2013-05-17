@@ -104,6 +104,14 @@ module DataKitten
       end
     end      
 
+    # Is the information in a structured format?
+    #
+    # @return [Boolean] whether the information is machine-readable.
+    def structured_format?
+      format == 'CSV'
+    end
+
+
   end  
 
 end

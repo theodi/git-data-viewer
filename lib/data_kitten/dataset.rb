@@ -70,6 +70,35 @@ module DataKitten
       nil
     end
     
+    # The human-readable title of the dataset.
+    #
+    # @return [String] the title of the dataset.
+    def data_title
+      nil
+    end
+  
+    # Human-readable documentation for the dataset.
+    #
+    # @return [String] the URL of the documentation.
+    def documentation_url
+      nil
+    end
+  
+    # What type of dataset is this?
+    # Options are: +:web_service+ for API-accessible data, or +:one_off+ for downloadable data dumps.
+    #
+    # @return [Symbol] the release type.
+    def release_type
+      false
+    end
+  
+    # Is the information time-sensitive?
+    #
+    # @return [Boolean] whether the information will go out of date.
+    def time_sensitive?
+      false
+    end
+    
     # The publishing format for the dataset.
     #
     # @return [Symbol] The format. For instance, datasets that publish metadata in
@@ -105,6 +134,20 @@ module DataKitten
     # @return [Array<Agent>] An array of contributors to the dataset, each as an Agent object.
     def contributors
       []
+    end
+    
+    # Has the data been crowdsourced?
+    #
+    # @return [Boolean] Whether the data has been crowdsourced or not.
+    def crowdsourced?
+      false
+    end
+
+    # The URL of the contributor license agreement
+    #
+    # @return [String] A URL for the agreement that contributors accept.
+    def contributor_agreement_url
+      nil
     end
 
     # A list of distributions. Has aliases for popular alternative vocabularies.
