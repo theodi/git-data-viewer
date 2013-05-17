@@ -18,5 +18,7 @@ require 'data_kitten/distribution'
 #
 # Currently supports Datapackages in git repositories (including but not limited to GitHub repos). Wider support will follow.
 #
+# https://gs1.wac.edgecastcdn.net/8019B6/data.tumblr.com/67399f2b335ef62d562dc9eb41c0db16/tumblr_mmy9g7rA8M1s4aj1ho1_500.jpg
+#
 module DataKitten
 end
