@@ -37,7 +37,7 @@ module OpenData
         # Create holding directory
         FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'repositories'))
         # generate working copy dir
-        File.join(Rails.root, 'tmp', 'repositories', stripped_uri.gsub('/','-'))
+        File.join(Rails.root, 'tmp', 'repositories', @access_url.gsub('/','-'))
       end
 
       def repository

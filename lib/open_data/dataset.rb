@@ -24,14 +24,6 @@ module OpenData
       source && host && publishing_format
     end
   
-    def stripped_uri
-      @stripped_uri ||= begin
-        uri = URI.parse(@uri)
-        path_without_extension = uri.path.rpartition('.')[0]
-        [uri.host, path_without_extension].join('')
-      end
-    end
-    
     def source
       nil
     end

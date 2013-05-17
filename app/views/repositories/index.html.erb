@@ -27,6 +27,6 @@
 
 <ul>
   <% @repositories.each do |repo| %>
-    <li><%= link_to repo.stripped_uri, repository_path(repo) %></li>
+    <li><%= link_to stripped_url(repo.access_url), repository_path(repo) %></li>
   <% end %>
 </ul>
