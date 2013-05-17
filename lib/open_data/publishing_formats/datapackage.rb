@@ -46,8 +46,8 @@ module OpenData
         metadata['resources'].map { |resource| Distribution.new(self, datapackage_resource: resource) }
       end
   
-      def changelog
-        @changelog ||= begin
+      def changes
+        @changes ||= begin
           if source == :git
             # Get a log for each file in the local repo
             logs = distributions.map do |file|

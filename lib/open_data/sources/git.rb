@@ -16,8 +16,8 @@ module OpenData
         :git
       end
 
-      def changelog
-        @changelog ||= begin
+      def changes
+        @changes ||= begin
           repository.log.map{|commit| commit}
         end
       end
