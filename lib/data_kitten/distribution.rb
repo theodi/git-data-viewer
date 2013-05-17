@@ -11,13 +11,11 @@ module DataKitten
     #   @return [String] the file format of the distribution.
     attr_accessor :format
 
-    # @!attribute uri
-    #   @return [String] a URI to access the distribution.
-    attr_accessor :uri
-
-    # @!attribute path
-    #   @return [String] a relative path with the current source to access the distribution.
-    attr_accessor :path
+    # @!attribute access_url
+    #   @return [String] a URL to access the distribution.
+    attr_accessor :access_url
+    alias_method :uri, :access_url
+    alias_method :download_url, :access_url
 
     # @!attribute description
     #   @return [String] a textual description
@@ -58,16 +56,17 @@ module DataKitten
         @schema = r['schema']
         # Get path
         @path = r['path']
-        @uri = r['url']
+        @access_url = r['url']
       end
     end
 
     # A usable name for the distribution, unique within the {Dataset}.
     #
-    # @return [String] either path or uri, depending on which is present.
-    def name
+    # @return [String] a locally unique name
+    def title
       @path || @uri
     end
+    alias_method :name, :title
 
     # An array of column headers for the distribution. Loaded from the schema, or from the file directly if no
     # schema is present.
@@ -90,8 +89,8 @@ module DataKitten
       @data ||= begin
         if @path
           datafile = @dataset.send(:load_file, @path)
-        elsif @uri
-          datafile = Net::HTTP.get(URI.parse(@uri))
+        elsif @access_url
+          datafile = Net::HTTP.get(URI.parse(@access_url))
         end
         if datafile
           CSV.parse(
