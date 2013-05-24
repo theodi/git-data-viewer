@@ -210,6 +210,8 @@
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
           <% elsif @repo.host == :bitbucket %>
             <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
+          <% elsif @repo.host == :gist %>
+            <%= commit.sha.first(10) %>
           <% else %>
             <%= commit.message %>
           <% end %>
