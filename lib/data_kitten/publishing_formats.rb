@@ -1,6 +1,6 @@
-require 'open_data/publishing_formats/datapackage'
+require 'data_kitten/publishing_formats/datapackage'
 
-module OpenData
+module DataKitten
   
   module PublishingFormats
 
@@ -8,7 +8,7 @@ module OpenData
 
     def detect_publishing_format
       [
-        OpenData::PublishingFormats::Datapackage
+        DataKitten::PublishingFormats::Datapackage
       ].each do |format|
         extend format if format.supported?(self)
       end

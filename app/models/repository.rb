@@ -1,9 +1,9 @@
-require 'open_data'
+require 'data_kitten'
 
 class Repository < ActiveRecord::Base
 
   def initialize(options)
-    @dataset = OpenData::Dataset.new(uri: options.delete(:uri))
+    @dataset = DataKitten::Dataset.new(access_url: options.delete(:uri))
     super
   end
   
