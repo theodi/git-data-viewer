@@ -1,7 +1,7 @@
 class RepositoriesController < ApplicationController
   
   def index
-    @repositories = %w{
+    @github_repos = %w{
       git://github.com/theodi/dataset-mod-disposals.git
       git://github.com/datasets/population.git
       git://github.com/datasets/house-prices-uk.git
@@ -9,9 +9,11 @@ class RepositoriesController < ApplicationController
       git://github.com/datasets/gdp-uk.git
       git://github.com/datasets/cofog.git
       https://github.com/theodi/hot-drinks.git
-      https://floppy@bitbucket.org/floppy/hot-drinks.git
     }.map{|uri| Repository.new(uri: uri)}
-    
+    @git_repos = %w{      
+      https://floppy@bitbucket.org/floppy/hot-drinks.git
+      https://gist.github.com/5633865.git
+    }.map{|uri| Repository.new(uri: uri)}
   end
   
   def show
