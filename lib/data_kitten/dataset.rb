@@ -162,7 +162,7 @@ module DataKitten
     # A history of changes to the Dataset
     #
     # @return [Array] An array of changes. Exact format depends on the source and publishing format.
-    def changes
+    def change_history
       []
     end
 

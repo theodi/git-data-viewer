@@ -24,9 +24,9 @@ module DataKitten
       end
 
       # A history of changes to the Dataset, taken from the full git changelog
-      # @see Dataset#changes
-      def changes
-        @changes ||= begin
+      # @see Dataset#change_history
+      def change_history
+        @change_history ||= begin
           repository.log.map{|commit| commit}
         end
       end

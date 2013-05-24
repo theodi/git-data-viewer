@@ -75,9 +75,9 @@ module DataKitten
       #
       # @return [Array] An array of changes. Exact format depends on the source.
       # 
-      # @see Dataset#changes
-      def changes
-        @changes ||= begin
+      # @see Dataset#change_history
+      def change_history
+        @change_history ||= begin
           if source == :git
             # Get a log for each file in the local repo
             logs = distributions.map do |file|

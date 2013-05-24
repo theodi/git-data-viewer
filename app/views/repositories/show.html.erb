@@ -156,7 +156,7 @@
 
     <h3>Changes</h3>
     <ul class='unstyled' id='commits'>
-      <% @repo.changes.each do |commit| %>
+      <% @repo.change_history.each do |commit| %>
         <li>
           <% if @repo.host == :github %>
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
