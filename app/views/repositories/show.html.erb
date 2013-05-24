@@ -74,9 +74,9 @@
     <% end %>
     
     
-    <% @repo.files.each do |file| %>
+    <% @repo.distributions.each do |file| %>
     
-      <h3><%= file.name %></h3>
+      <h3><%= file.title %></h3>
 
       <dl class='dl-horizontal'>
         <dt>Format</dt>
@@ -156,7 +156,7 @@
 
     <h3>Changes</h3>
     <ul class='unstyled' id='commits'>
-      <% @repo.changelog.each do |commit| %>
+      <% @repo.change_history.each do |commit| %>
         <li>
           <% if @repo.host == :github %>
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>

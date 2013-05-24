@@ -14,4 +14,10 @@ module RepositoriesHelper
     end
   end
 
+  def stripped_url(url)
+    uri = URI.parse(url)
+    path_without_extension = uri.path.rpartition('.')[0]
+    [uri.host, path_without_extension].join('')
+  end
+
 end

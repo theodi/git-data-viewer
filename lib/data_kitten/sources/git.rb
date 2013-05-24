@@ -1,7 +1,11 @@
-module OpenData
+module DataKitten
   
   module Sources
     
+    # Git source module. Automatically mixed into {Dataset} for datasets that are loaded from Git repositories.
+    #
+    # @see Dataset
+    #
     module Git
   
       private
@@ -12,12 +16,17 @@ module OpenData
 
       public
 
+      # The source type of the dataset.
+      # @return [Symbol] +:git+
+      # @see Dataset#source
       def source
         :git
       end
 
-      def changelog
-        @changelog ||= begin
+      # A history of changes to the Dataset, taken from the full git changelog
+      # @see Dataset#change_history
+      def change_history
+        @change_history ||= begin
           repository.log.map{|commit| commit}
         end
       end
@@ -37,7 +46,7 @@ module OpenData
         # Create holding directory
         FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'repositories'))
         # generate working copy dir
-        File.join(Rails.root, 'tmp', 'repositories', stripped_uri.gsub('/','-'))
+        File.join(Rails.root, 'tmp', 'repositories', @access_url.gsub('/','-'))
       end
 
       def repository
@@ -46,7 +55,7 @@ module OpenData
           repo.pull("origin", "master")
           repo
         rescue ArgumentError
-          repo = ::Git.clone(@uri, working_copy_path)
+          repo = ::Git.clone(@access_url, working_copy_path)
         end
       end  
   
