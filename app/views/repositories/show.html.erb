@@ -138,6 +138,12 @@
     <% if @repo.host == :github %>
       <div class='well'>
         <div class='actionbutton'>
+          <a href='<%= @repo.github_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on GitHub
+          </a>
+        </div>
+        <div class='actionbutton'>
           <a href='<%= @repo.github_path("archive/master.zip") %>' class='btn btn-primary btn-block'>
             <i class='icon-cloud-download'></i>
             Download Latest
@@ -167,14 +173,6 @@
         </li>
       <% end %>
     </ul>
-    
-    <% if @repo.host == :github %>
-      <p>
-        <a href='<%= @repo.github_path %>'>
-          View more on Github
-        </a>
-      </p>
-    <% end %>
 
   </div>
   
