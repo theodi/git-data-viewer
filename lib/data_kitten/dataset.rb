@@ -46,10 +46,10 @@ module DataKitten
   
     # Can metadata be loaded for this Dataset?
     #
-    # @return [Boolean] true if metadata can be loaded, false if it's on 
-    #                   an unknown hosting type, or has an unknown metadata format.
+    # @return [Boolean] true if metadata can be loaded, false if it's 
+    #                   an unknown source type, or has an unknown metadata format.
     def supported?
-      source && host && publishing_format
+      source && publishing_format
     end
   
     # The source type of the dataset.
