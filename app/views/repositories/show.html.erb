@@ -160,12 +160,56 @@
       </div>
     <% end %>
 
+    <% if @repo.host == :bitbucket %>
+      <div class='well'>
+        <div class='actionbutton'>
+          <a href='<%= @repo.bitbucket_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on Bitbucket
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <a href='<%= @repo.bitbucket_path("get/master.zip") %>' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <% feed = @repo.bitbucket_path("rss") %>
+          <%= auto_discovery_link_tag :rss, feed %>
+          <a href='<%= feed %>' class='btn btn-primary btn-block'>
+            <i class='icon-rss'></i>
+            Subscribe to updates
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @repo.host == :gist %>
+      <div class='well'>
+        <div class='actionbutton'>
+          <a href='<%= @repo.gist_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on Gist
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <a href='<%= @repo.gist_path("download") %>' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+      </div>
+    <% end %>
+
     <h3>Changes</h3>
     <ul class='unstyled' id='commits'>
       <% @repo.change_history.each do |commit| %>
         <li>
           <% if @repo.host == :github %>
             <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
+          <% elsif @repo.host == :bitbucket %>
+            <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
           <% else %>
             <%= commit.message %>
           <% end %>
