@@ -17,6 +17,10 @@ module DataKitten
     alias_method :uri, :access_url
     alias_method :download_url, :access_url
 
+    # @!attribute path
+    #   @return [String] the path of the distribution within the source, if appropriate
+    attr_accessor :path
+
     # @!attribute description
     #   @return [String] a textual description
     attr_accessor :description
