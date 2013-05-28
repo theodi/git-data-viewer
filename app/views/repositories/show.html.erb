@@ -1,10 +1,10 @@
-<h1><%= @repo.metadata['title'] || @repo.metadata['name'] %></h1>
+<h1><%= @repo.data_title %></h1>
 
 <div class='row-fluid'>  
   
   <div class='span9'>
     <p>
-      <%= @repo.metadata['description']%>
+      <%= @repo.description %>
     </p>
 
     <dl class='dl-horizontal'>
@@ -45,11 +45,11 @@
         </dd>
       <% end %>
 
-      <% if @repo.metadata['keywords'] %>
+      <% if @repo.keywords %>
         <dt>Keywords</dt>
         <dd>
           <ul class='inline'>
-            <% @repo.metadata['keywords'].each do |keyword| %>
+            <% @repo.keywords.each do |keyword| %>
               <li><span class='label'><%= keyword%></span></li>
             <% end %>
           </ul>
@@ -58,10 +58,10 @@
       
     </dl>
     
-    <% if @repo.metadata['sources'] %>
+    <% if @repo.sources %>
       <h4>Sources</h4>
       <ul>
-        <% @repo.metadata['sources'].each do |source| %>
+        <% @repo.sources.each do |source| %>
           <li>
             <% if source['web'] %>
               <%= link_to source['name'], source['web']%>
