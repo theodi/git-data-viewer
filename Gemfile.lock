@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/theodi/data-kitten.git
+  revision: 7ed286614c857abd8075c7a69624cd78dc1afbf3
+  specs:
+    data-kitten (0.0.1)
+      git
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -159,6 +166,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   coffee-rails (~> 4.0.0)
+  data-kitten!
   dotenv
   foreman
   git
