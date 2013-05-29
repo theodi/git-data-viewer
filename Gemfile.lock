@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data-kitten.git
-  revision: 7ed286614c857abd8075c7a69624cd78dc1afbf3
+  revision: 0cb34ecb9be416d531fe165318164a5fd8457ce1
   specs:
     data-kitten (0.0.1)
       git
@@ -84,7 +84,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     minitest (4.7.4)
-    multi_json (1.7.3)
+    multi_json (1.7.4)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
@@ -131,7 +131,7 @@ GEM
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0.rc0)
       tilt (~> 1.3)
-    sprockets (2.9.3)
+    sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
