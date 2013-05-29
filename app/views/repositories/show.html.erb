@@ -63,10 +63,10 @@
       <ul>
         <% @repo.sources.each do |source| %>
           <li>
-            <% if source['web'] %>
-              <%= link_to source['name'], source['web']%>
+            <% if source.web %>
+              <%= link_to source.name, source.web%>
             <% else %>
-              <%= source['name'] %>
+              <%= source.name %>
             <% end %>            
           </li>
         <% end %>
