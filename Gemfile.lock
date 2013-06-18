@@ -1,11 +1,12 @@
 GIT
   remote: git://github.com/theodi/data-kitten.git
-  revision: ccbb0ff5d50c2e1006fa6980ac8b16feb2a1bf9e
+  revision: 1de14e1a897e08b7ef661fb8667f2d7ee5d252b8
   specs:
     data-kitten (0.0.1)
       git
       json
       linkeddata
+      nokogiri
       rest-client
 
 GEM
