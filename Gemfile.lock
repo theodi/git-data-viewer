@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data-kitten.git
-  revision: ff3f24750d8d9a1fa949fd04b004202c2751f58b
+  revision: ccbb0ff5d50c2e1006fa6980ac8b16feb2a1bf9e
   specs:
     data-kitten (0.0.1)
       git
@@ -53,7 +53,7 @@ GEM
     daemons (1.1.9)
     diff-lcs (1.2.4)
     dotenv (0.7.0)
-    ebnf (0.3.0)
+    ebnf (0.3.1)
       rdf
       sxp
     erubis (2.7.0)
@@ -133,9 +133,9 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.0.4)
-    rdf (1.0.6)
+    rdf (1.0.7)
       addressable (>= 2.2)
-    rdf-isomorphic (1.0.1)
+    rdf-isomorphic (1.0.2)
       rdf (>= 1.0)
     rdf-json (1.0.0)
       json_pure (>= 1.4)
@@ -155,15 +155,15 @@ GEM
     rdf-rdfxml (1.0.1)
       rdf (>= 1.0)
       rdf-xsd (>= 1.0)
-    rdf-trig (1.0.0)
-      ebnf (>= 0.2.0)
-      rdf (>= 1.0)
-      rdf-turtle (>= 1.0.4)
+    rdf-trig (1.0.1)
+      ebnf (>= 0.3.0)
+      rdf (>= 1.0.7)
+      rdf-turtle (>= 1.0.7)
     rdf-trix (1.0.0)
       rdf (>= 1.0)
-    rdf-turtle (1.0.6)
+    rdf-turtle (1.0.7)
       ebnf (>= 0.3.0)
-      rdf (>= 1.0)
+      rdf (>= 1.0.7)
     rdf-xsd (1.0.2.1)
       nokogiri (>= 1.5.0)
       rdf (>= 0.3.4)
