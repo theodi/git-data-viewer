@@ -13,7 +13,11 @@
         <dt><%= 'License'.pluralize(@repo.licenses.length) %></dt>
         <dd>
           <% @repo.licenses.each do |l| %>
-            <%= link_to license_name(l), l.uri %>
+            <% if l.uri %>
+              <%= link_to license_name(l), l.uri %>
+            <% else %>
+              <%= license_name(l) %>
+            <% end %>
           <% end %>
         </dd>
       <% end %>
