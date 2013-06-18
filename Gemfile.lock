@@ -52,7 +52,7 @@ GEM
     coffee-script-source (1.6.2)
     daemons (1.1.9)
     diff-lcs (1.2.4)
-    dotenv (0.7.0)
+    dotenv (0.8.0)
     ebnf (0.3.1)
       rdf
       sxp
