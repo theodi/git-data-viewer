@@ -77,8 +77,18 @@
       </ul>
     <% end %>
     
+
+    <% if @repo.distributions.count > 1 %>
+      <h3><%= @repo.distributions.count %> resources</h3>
+      <ul>
+        <% @repo.distributions.each_with_index do |file, index| %>
+          <li><a href='#distribution-<%= index %>'><%= file.title %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
     
-    <% @repo.distributions.each do |file| %>
+    <% @repo.distributions.each_with_index do |file, index| %>
+      <a name='distribution-<%= index %>'></a>
       <%= render partial: 'preview', locals: {file: file} %>
     <% end %>
     
