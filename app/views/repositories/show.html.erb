@@ -152,23 +152,25 @@
       </div>
     <% end %>
 
-    <h3>Changes</h3>
-    <ul class='unstyled' id='commits'>
-      <% @repo.change_history.each do |commit| %>
-        <li>
-          <% if @repo.host == :github %>
-            <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
-          <% elsif @repo.host == :bitbucket %>
-            <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
-          <% elsif @repo.host == :gist %>
-            <%= commit.sha.first(10) %>
-          <% else %>
-            <%= commit.message %>
-          <% end %>
-          <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
-        </li>
-      <% end %>
-    </ul>
+    <% unless @repo.change_history.empty? %>
+      <h3>Changes</h3>
+      <ul class='unstyled' id='commits'>
+        <% @repo.change_history.each do |commit| %>
+          <li>
+            <% if @repo.host == :github %>
+              <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
+            <% elsif @repo.host == :bitbucket %>
+              <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
+            <% elsif @repo.host == :gist %>
+              <%= commit.sha.first(10) %>
+            <% else %>
+              <%= commit.message %>
+            <% end %>
+            <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 
   </div>
   
