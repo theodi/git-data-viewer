@@ -62,7 +62,7 @@
       
     </dl>
     
-    <% if @repo.sources %>
+    <% unless @repo.sources.empty? %>
       <h4>Sources</h4>
       <ul>
         <% @repo.sources.each do |source| %>
