@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 #ruby-gemset=github-viewer
 
 gem 'rails', '4.0.0.rc2'
-gem 'data-kitten', :git => "git://github.com/theodi/data-kitten.git"
+gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
 
 group :development, :test do
   gem 'sqlite3'
