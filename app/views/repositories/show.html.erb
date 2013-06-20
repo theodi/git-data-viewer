@@ -13,7 +13,11 @@
         <dt><%= 'License'.pluralize(@repo.licenses.length) %></dt>
         <dd>
           <% @repo.licenses.each do |l| %>
-            <%= link_to license_name(l), l.uri %>
+            <% if l.uri %>
+              <%= link_to license_name(l), l.uri %>
+            <% else %>
+              <%= license_name(l) %>
+            <% end %>
           <% end %>
         </dd>
       <% end %>
@@ -58,7 +62,7 @@
       
     </dl>
     
-    <% if @repo.sources %>
+    <% unless @repo.sources.empty? %>
       <h4>Sources</h4>
       <ul>
         <% @repo.sources.each do |source| %>
@@ -73,66 +77,19 @@
       </ul>
     <% end %>
     
+
+    <% if @repo.distributions.count > 1 %>
+      <h3><%= @repo.distributions.count %> resources</h3>
+      <ul>
+        <% @repo.distributions.each_with_index do |file, index| %>
+          <li><a href='#distribution-<%= index %>'><%= file.title %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
     
-    <% @repo.distributions.each do |file| %>
-    
-      <h3><%= file.title %></h3>
-
-      <dl class='dl-horizontal'>
-        <dt>Format</dt>
-        <dd><span class='label label-success'><%= file.format %></label></dd>
-      </dl>
-
-      <% if file.description %>
-        <p><%= file.description %></p>
-      <% end %>
-
-      <% if file.schema %>
-        <table class='table table-striped'>
-          <tr>
-            <th>ID</th>
-            <th>Label</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Format</th>
-            <th>Unit</th>
-          </tr>
-          <% file.schema['fields'].each do |field| %>
-            <tr>
-              <td><%= field['id'] %></td>
-              <td><%= field['label'] %></td>
-              <td><%= field['description'] %></td>
-              <td><%= field['type'] %></td>
-              <td><%= field['format'] %></td>
-              <td><%= field['unit']['id'] if field['unit'] %></td>
-            </tr>
-          <% end %>
-  
-        </table>
-      <% end %>
-
-      <% if file.data %>
-        <% preview_data = file.data.first(10) %>
-        <h4>Sample Data (<%= preview_data.length %> of <%= file.data.size %>)</h4>
-        <div class='sample-data'>
-          <table class='table table-striped'>
-            <tr>
-              <% file.headers.each do |header| %>
-                <th><%= header %></th>
-              <% end %>
-            </tr>
-            <% preview_data.each do |row| %>
-              <tr>
-                <% file.headers.each do |header| %>
-                  <td><%= row[header] %></td>
-                <% end %>
-              </tr>
-            <% end %>
-  
-          </table>
-        </div>
-      <% end %>
-        
+    <% @repo.distributions.each_with_index do |file, index| %>
+      <a name='distribution-<%= index %>'></a>
+      <%= render partial: 'preview', locals: {file: file} %>
     <% end %>
     
   </div>
@@ -205,23 +162,25 @@
       </div>
     <% end %>
 
-    <h3>Changes</h3>
-    <ul class='unstyled' id='commits'>
-      <% @repo.change_history.each do |commit| %>
-        <li>
-          <% if @repo.host == :github %>
-            <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
-          <% elsif @repo.host == :bitbucket %>
-            <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
-          <% elsif @repo.host == :gist %>
-            <%= commit.sha.first(10) %>
-          <% else %>
-            <%= commit.message %>
-          <% end %>
-          <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
-        </li>
-      <% end %>
-    </ul>
+    <% unless @repo.change_history.empty? %>
+      <h3>Changes</h3>
+      <ul class='unstyled' id='commits'>
+        <% @repo.change_history.each do |commit| %>
+          <li>
+            <% if @repo.host == :github %>
+              <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
+            <% elsif @repo.host == :bitbucket %>
+              <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
+            <% elsif @repo.host == :gist %>
+              <%= commit.sha.first(10) %>
+            <% else %>
+              <%= commit.message %>
+            <% end %>
+            <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 
   </div>
   
