@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/theodi/data-kitten.git
-  revision: 3b29cd843d45b8f039363cd87aaee287dc0974ba
+  remote: git://github.com/theodi/data_kitten.git
+  revision: ef4df8cf8ded8571c92a7bb7d56d709e01592430
   specs:
-    data-kitten (0.0.1)
+    data_kitten (0.0.1)
       git
       json
       linkeddata
@@ -162,7 +162,7 @@ GEM
       rdf-turtle (>= 1.0.7)
     rdf-trix (1.0.0)
       rdf (>= 1.0)
-    rdf-turtle (1.0.7)
+    rdf-turtle (1.0.8)
       ebnf (>= 0.3.0)
       rdf (>= 1.0.7)
     rdf-xsd (1.0.2.1)
@@ -223,7 +223,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   coffee-rails (~> 4.0.0)
-  data-kitten!
+  data_kitten!
   dotenv
   foreman
   git

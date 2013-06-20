@@ -1,0 +1,36 @@
+<h3><%= file.title %></h3>
+
+<dl class='dl-horizontal'>
+  <dt>Format</dt>
+  <dd><span class='label label-success'><%= file.format.extension.upcase %></label></dd>
+</dl>
+
+<% if file.description %>
+  <p><%= file.description %></p>
+<% end %>
+
+<% if file.schema %>
+  <table class='table table-striped'>
+    <tr>
+      <th>ID</th>
+      <th>Label</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Format</th>
+      <th>Unit</th>
+    </tr>
+    <% file.schema['fields'].each do |field| %>
+      <tr>
+        <td><%= field['id'] %></td>
+        <td><%= field['label'] %></td>
+        <td><%= field['description'] %></td>
+        <td><%= field['type'] %></td>
+        <td><%= field['format'] %></td>
+        <td><%= field['unit']['id'] if field['unit'] %></td>
+      </tr>
+    <% end %>
+
+  </table>
+<% end %>
+
+<%= render partial: "preview_#{file.format.extension}", locals: {file: file} rescue nil %>
