@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: ef4df8cf8ded8571c92a7bb7d56d709e01592430
+  revision: 4b1e313806a7e25a3e0343c1101be45cb33077c8
   specs:
     data_kitten (0.0.1)
       git
@@ -107,7 +107,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     mini_portile (0.5.0)
-    minitest (4.7.4)
+    minitest (4.7.5)
     multi_json (1.7.7)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
@@ -133,7 +133,7 @@ GEM
       activesupport (= 4.0.0.rc2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.0.4)
+    rake (10.1.0)
     rdf (1.0.7)
       addressable (>= 2.2)
     rdf-isomorphic (1.0.2)
@@ -182,7 +182,7 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     sass (3.2.9)
-    sass-rails (4.0.0.rc2)
+    sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
