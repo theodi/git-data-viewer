@@ -1,104 +1,23 @@
-require 'net/http'
-require 'csv'
-require 'uri'
-require 'cgi'
+require 'data_kitten'
 
 class Repository < ActiveRecord::Base
 
-  attr_accessor :uri
-  
-  def stripped_uri
-    @stripped_uri ||= begin
-      uri = URI.parse(@uri)
-      path_without_extension = uri.path.rpartition('.')[0]
-      [uri.host, path_without_extension].join('')
-    end
+  def initialize(options)
+    @dataset = DataKitten::Dataset.new(access_url: options.delete(:uri))
+    super
   end
   
   def to_param
-    CGI.escape(@uri).gsub('.','%2E')
+    CGI.escape(@dataset.uri).gsub('.','%2E')
   end
   
-  def supported?
-    hosted_by_github? && metadata
-  end
-  
-  def hosted_by_github?
-    (@uri =~ /\A(git|https?):\/\/github\.com\//).present?
-  end
-
-  def github_user_name
-    @github_user_name ||= hosted_by_github? ? uri.split('/')[-2] : nil
-  end
-  
-  def github_repository_name
-    @github_repository_name ||= hosted_by_github? ? uri.split('/')[-1].split('.')[0] : nil
-  end
-
-  def repository
-    @repository ||= $github.repos.get github_user_name, github_repository_name
-  end
-
-  def commits
-    @commits ||= $github.repos.commits.all github_user_name, github_repository_name
-  end
-
-  def metadata
-    @metadata ||= begin
-      if json = Net::HTTP.get(URI.parse("https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/datapackage.json"))
-        JSON.parse(json)
-      else
-        nil
-      end
+  # Delegate everything to the dataset object
+  def method_missing(*args)
+    begin
+      super
+    rescue NoMethodError
+      @dataset.send(*args)
     end
   end
   
-  def maintainers
-    metadata && metadata['maintainers'] ? metadata['maintainers'] : []
-  end
-
-  def headers
-    if metadata
-      if metadata['resources'][0]['schema']
-        metadata['resources'][0]['schema']['fields'].map{|x| x['id']}
-      else
-        data.headers
-      end
-    else
-      []
-    end
-  end  
-
-  def format
-    @format ||= begin
-      if metadata
-        f = metadata['resources'][0]['format']
-        if f.nil?
-          f = metadata['resources'][0]['path'].is_a?(String) ? metadata['resources'][0]['path'].split('.').last.upcase : nil
-        end
-        f.upcase! unless f.nil?
-        f
-      else
-        nil
-      end
-    end
-  end
-    
-  def data
-    @data ||= begin 
-      url = nil
-      if metadata && metadata['resources'][0]['path'].is_a?(String)
-        url = "https://raw.github.com/#{github_user_name}/#{github_repository_name}/master/#{metadata['resources'][0]['path']}"
-      elsif metadata && metadata['resources'][0]['url'].is_a?(String)
-        url = metadata['resources'][0]['url']
-      end
-      if url
-        datafile = Net::HTTP.get(URI.parse(url))
-        CSV.parse(datafile, :headers => true)
-      else
-        nil
-      end
-    end
-  end
-
 end

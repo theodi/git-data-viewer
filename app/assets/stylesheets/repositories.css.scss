@@ -16,3 +16,15 @@
 #commits li:nth-child(odd) {
   background-color: #f9f9f9;
 }
+
+.actionbutton {
+  margin-bottom: 15px;
+}
+
+.actionbutton:last-child {
+  margin-bottom: 0px;
+}
+
+.sample-data {
+  overflow-x: scroll;
+}

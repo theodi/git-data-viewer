@@ -21,3 +21,6 @@
 id_rsa*
 /.chef/rackspace_secrets.yaml
 /.vagrant/
+/doc/
+/.yardoc/
+/coverage/

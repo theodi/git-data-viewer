@@ -1,15 +1,19 @@
-# Github Viewer
+# Git Data Viewer
 
-An experiment in displaying Open Data stored in Github in a nice way for non-developers.
+[![Build Status](http://jenkins.theodi.org/job/git-data-viewer-build-master/badge/icon)](http://jenkins.theodi.org/job/git-data-viewer-build-master/)
+[![Dependency Status](https://gemnasium.com/theodi/git-data-viewer.png)](https://gemnasium.com/theodi/git-data-viewer)
+[![Code Climate](https://codeclimate.com/github/theodi/git-data-viewer.png)](https://codeclimate.com/github/theodi/git-data-viewer)
 
-Relies on a variant of Andrew Berkeley's [calcJSON](https://github.com/spatchcock/calcJSON) format to load metadata from repository.
+An experiment in displaying Open Data stored in Git in a nice way for non-developers.
+
+Relies on a loading metadata from a [DataPackage](http://www.dataprotocols.org/en/latest/data-packages.html) file contained in the repository.
 
 For more details, see the [sample repository](https://github.com/theodi/github-viewer-test-data).
 
 Requirements
 ------------
 
-This uses Ruby 2 and Rails 4 beta 1. Caveat Emptor.
+This uses Ruby 2 and Rails 4 rc 1. Caveat Emptor.
 
 License
 -------

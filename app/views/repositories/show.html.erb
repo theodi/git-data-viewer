@@ -1,112 +1,185 @@
-<h1><%= @repo.metadata['title'] || @repo.metadata['name'] %></h1>
+<h1><%= @repo.data_title %></h1>
 
 <div class='row-fluid'>  
   
   <div class='span9'>
     <p>
-      <%= @repo.metadata['description']%>
+      <%= @repo.description %>
     </p>
 
     <dl class='dl-horizontal'>
-      <dt>Format</dt>
-      <dd><span class='label label-success'><%= @repo.format %></label></dd>
-      <% if @repo.metadata['licenses'] && @repo.metadata['licenses'][0] %>
-        <dt>License</dt>
-        <dd><%= link_to t(@repo.metadata['licenses'][0]['id']), @repo.metadata['licenses'][0]['url'] %></dd>
-      <% end %>
-      <% unless @repo.maintainers.empty? %>
-        <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
+
+      <% unless @repo.licenses.empty? %>
+        <dt><%= 'License'.pluralize(@repo.licenses.length) %></dt>
         <dd>
-          <% @repo.maintainers.each do |m| %>
-            <% if m['web'] %>
-              <%= link_to m['name'], m['web']%>
-            <% elsif m['email'] %>
-              <%= mail_to m['name'], m['email']%>
+          <% @repo.licenses.each do |l| %>
+            <% if l.uri %>
+              <%= link_to license_name(l), l.uri %>
             <% else %>
-              <%= m['name'] %>
+              <%= license_name(l) %>
             <% end %>
           <% end %>
         </dd>
       <% end %>
+
+      <% unless @repo.publishers.empty? %>
+        <dt><%= 'Publisher'.pluralize(@repo.publishers.length) %></dt>
+        <dd>
+          <% @repo.publishers.each do |agent| %>
+            <%= agent_link(agent) %>
+          <% end %>
+        </dd>
+      <% end %>
+
+      <% unless @repo.maintainers.empty? %>
+        <dt><%= 'Maintainer'.pluralize(@repo.maintainers.length) %></dt>
+        <dd>
+          <% @repo.maintainers.each do |agent| %>
+            <%= agent_link(agent) %>
+          <% end %>
+        </dd>
+      <% end %>
+
+      <% unless @repo.contributors.empty? %>
+        <dt><%= 'Contributor'.pluralize(@repo.contributors.length) %></dt>
+        <dd>
+          <% @repo.contributors.each do |agent| %>
+            <%= agent_link(agent) %>
+          <% end %>
+        </dd>
+      <% end %>
+
+      <% if @repo.keywords %>
+        <dt>Keywords</dt>
+        <dd>
+          <ul class='inline'>
+            <% @repo.keywords.each do |keyword| %>
+              <li><span class='label'><%= keyword%></span></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
+      
     </dl>
     
-    <% @repo.metadata['resources'].each_with_index do |resource, index| %>
+    <% unless @repo.sources.empty? %>
+      <h4>Sources</h4>
+      <ul>
+        <% @repo.sources.each do |source| %>
+          <li>
+            <% if source.web %>
+              <%= link_to source.name, source.web%>
+            <% else %>
+              <%= source.name %>
+            <% end %>            
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
     
-      <h3><%= resource['path'] %></h3>
 
-      <% if resource ['description'] %>
-        <p><%= resource ['description']%></p>
-      <% end %>
-
-      <% if resource['schema'] %>
-        <table class='table table-striped'>
-          <tr>
-            <th>ID</th>
-            <th>Label</th>
-            <th>Description</th>
-            <th>Type</th>
-            <th>Format</th>
-            <th>Unit</th>
-          </tr>
-          <% resource['schema']['fields'].each do |field| %>
-            <tr>
-              <td><%= field['id'] %></td>
-              <td><%= field['label'] %></td>
-              <td><%= field['description'] %></td>
-              <td><%= field['type'] %></td>
-              <td><%= field['format'] %></td>
-              <td><%= field['unit']['id'] if field['unit'] %></td>
-            </tr>
-          <% end %>
-  
-        </table>
-      <% end %>
-
-      <h4>Sample Data (<%= @preview_data.length %> of <%= @repo.data.size %>)</h4>
-      <div id="mygrid-<%= index %>" style="height: 400px"></div>
-      <script>
-      var data = <%= @preview_data.map{|x| x.to_hash}.to_json.html_safe %>;
-      var dataset = new recline.Model.Dataset({
-        records: data
-      });
-      var $el = $('#mygrid-<%= index %>');
-      var grid = new recline.View.Grid({
-        model: dataset,
-        el: $el,
-        edit: false
-      });
-      grid.visible = true;
-      grid.render();
-      </script>
-  
+    <% if @repo.distributions.count > 1 %>
+      <h3><%= @repo.distributions.count %> resources</h3>
+      <ul>
+        <% @repo.distributions.each_with_index do |file, index| %>
+          <li><a href='#distribution-<%= index %>'><%= file.title %></a></li>
+        <% end %>
+      </ul>
+    <% end %>
+    
+    <% @repo.distributions.each_with_index do |file, index| %>
+      <a name='distribution-<%= index %>'></a>
+      <%= render partial: 'preview', locals: {file: file} %>
     <% end %>
     
   </div>
 
   <div class='span3'>
-    <% if @repo.hosted_by_github? %>
+    <% if @repo.host == :github %>
       <div class='well'>
-        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>/archive/master.zip' class='btn btn-primary'>
-          <i class='icon icon-white icon-download-alt'></i>
-          Download Latest
-        </a>
+        <div class='actionbutton'>
+          <a href='<%= @repo.github_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on GitHub
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <a href='<%= @repo.github_path("archive/master.zip") %>' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <% feed = @repo.github_path("commits/master.atom") %>
+          <%= auto_discovery_link_tag :rss, feed %>
+          <a href='<%= feed %>' class='btn btn-primary btn-block'>
+            <i class='icon-rss'></i>
+            Subscribe to updates
+          </a>
+        </div>
       </div>
+    <% end %>
 
+    <% if @repo.host == :bitbucket %>
+      <div class='well'>
+        <div class='actionbutton'>
+          <a href='<%= @repo.bitbucket_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on Bitbucket
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <a href='<%= @repo.bitbucket_path("get/master.zip") %>' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <% feed = @repo.bitbucket_path("rss") %>
+          <%= auto_discovery_link_tag :rss, feed %>
+          <a href='<%= feed %>' class='btn btn-primary btn-block'>
+            <i class='icon-rss'></i>
+            Subscribe to updates
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @repo.host == :gist %>
+      <div class='well'>
+        <div class='actionbutton'>
+          <a href='<%= @repo.gist_path %>' class='btn btn-warning btn-block'>
+            <i class='icon-code-fork'></i>
+            Fork on Gist
+          </a>
+        </div>
+        <div class='actionbutton'>
+          <a href='<%= @repo.gist_path("download") %>' class='btn btn-primary btn-block'>
+            <i class='icon-cloud-download'></i>
+            Download Latest
+          </a>
+        </div>
+      </div>
+    <% end %>
+
+    <% unless @repo.change_history.empty? %>
       <h3>Changes</h3>
       <ul class='unstyled' id='commits'>
-        <% @repo.commits.each do |commit| %>
+        <% @repo.change_history.each do |commit| %>
           <li>
-            <%= link_to commit['commit']['message'],
-             "https://github.com/#{@repo.github_user_name}/#{@repo.github_repository_name}/commit/#{commit['sha']}" %>
-            <br/><small class='pull-right'><%= DateTime.parse(commit['commit']['committer']['date']).to_s(:long) %></small>
+            <% if @repo.host == :github %>
+              <%= link_to commit.message, @repo.github_path("commit/#{commit.sha}") %>
+            <% elsif @repo.host == :bitbucket %>
+              <%= link_to commit.message, @repo.bitbucket_path("commits/#{commit.sha}") %>
+            <% elsif @repo.host == :gist %>
+              <%= commit.sha.first(10) %>
+            <% else %>
+              <%= commit.message %>
+            <% end %>
+            <br/><small class='pull-right'><%= commit.committer.name %>, <%= commit.committer.date.to_s(:long) %></small>
           </li>
         <% end %>
       </ul>
-      <p>
-        <a href='https://github.com/<%= @repo.github_user_name %>/<%= @repo.github_repository_name %>'>
-          View more on Github
-        </a>
-      </p>
     <% end %>
 
   </div>

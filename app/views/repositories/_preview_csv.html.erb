@@ -1,0 +1,22 @@
+<% if file.data %>
+  <% preview_data = file.data.first(10) %>
+
+  <h4>Sample Data (<%= preview_data.length %> of <%= file.data.size %>)</h4>
+  <div id="mygrid-<%= index %>" style="height: 400px"></div>
+  <script>
+  var data = <%= preview_data.map{|x| x.to_hash}.to_json.html_safe %>;
+  var dataset = new recline.Model.Dataset({
+    records: data
+  });
+  var $el = $('#mygrid-<%= index %>');
+  var grid = new recline.View.Grid({
+    model: dataset,
+    el: $el,
+    edit: false
+  });
+  grid.visible = true;
+  grid.render();
+  </script>
+  
+<% end %>
+  

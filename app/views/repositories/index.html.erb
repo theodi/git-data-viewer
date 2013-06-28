@@ -1,19 +1,49 @@
-<h1>Enter a dataset URL</h1>
+<div class='well'>
+  <p>
+    This is an Open Data Institute experiment to create a friendly viewer for datasets stored in git repositories.
+    Currently it supports datasets that use the <a href='http://www.dataprotocols.org/en/latest/data-packages.html'>DataPackage</a>
+    metadata format.
+  </p>
+  <p>
+    Comments and feedback are most welcome - if you have an idea, or find a bug or dataset that should work but 
+    doesn't, <a href='https://github.com/theodi/git-data-viewer/issues/new'>file an issue on the GitHub page</a>,
+    or come and talk to us on <code>irc.freenode.net</code> in the <code>#theodi</code> channel.
+  </p>
+</div>
+
+<h1>Enter the public clone URL of a repository:</h1>
 
 <%= form_tag create_repository_path, :class => 'form-search' do %>
-  <%= text_field_tag :uri, '', :class => 'input-xxlarge search-query', :placeholder => @repositories.first.uri, :required => 'required' %>
+  <%= text_field_tag :uri, '', :class => 'input-xxlarge search-query', :placeholder => @github_repos.first.uri, :required => 'required' %>
   <%= submit_tag 'Go', :class => 'btn' %>
 <% end %>
 <small>
   Currently we only support datasets that conform to the 
   <a href='http://www.dataprotocols.org/en/latest/data-packages.html'>DataPackage</a>
-  spec, and that are hosted on GitHub.
+  spec.
 </small>
 
 <h2>Or choose an example</h2>
 
+<p>
+  We can load data from github:
+</p>
 <ul>
-  <% @repositories.each do |repo| %>
-    <li><%= link_to repo.stripped_uri, repository_path(repo) %></li>
+  <% @github_repos.each do |repo| %>
+    <li><%= link_to stripped_url(repo.access_url), repository_path(repo) %></li>
   <% end %>
 </ul>
+
+<p>
+  But we can also load from other git hosts, like bitbucket or gist:
+</p>
+<ul>
+  <% @git_repos.each do |repo| %>
+    <li><%= link_to stripped_url(repo.access_url), repository_path(repo) %></li>
+  <% end %>
+</ul>
+
+<a href="https://github.com/theodi/git-data-viewer">
+  <img style="position: absolute; top: 0; right: 0; border: 0;"
+   src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+</a>
