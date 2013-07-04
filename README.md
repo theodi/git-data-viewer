@@ -13,7 +13,7 @@ For more details, see the [sample repository](https://github.com/theodi/github-v
 Requirements
 ------------
 
-This uses Ruby 2 and Rails 4 rc 1. Caveat Emptor.
+This uses Ruby 2 and Rails 4.0.0.
 
 License
 -------
