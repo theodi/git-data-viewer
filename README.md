@@ -1,6 +1,6 @@
 # Git Data Viewer
 
-[![Build Status](http://jenkins.theodi.org/job/git-data-viewer-build-master/badge/icon)](http://jenkins.theodi.org/job/git-data-viewer-build-master/)
+[![Build Status](http://jenkins.theodi.org/job/git-data-viewer-master/badge/icon)](http://jenkins.theodi.org/job/git-data-viewer-master/)
 [![Dependency Status](https://gemnasium.com/theodi/git-data-viewer.png)](https://gemnasium.com/theodi/git-data-viewer)
 [![Code Climate](https://codeclimate.com/github/theodi/git-data-viewer.png)](https://codeclimate.com/github/theodi/git-data-viewer)
 
