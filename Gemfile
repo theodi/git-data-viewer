@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 #ruby=ruby-2.0.0
 #ruby-gemset=github-viewer
 
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.0.2'
 gem 'data_kitten', :git => "git://github.com/theodi/data_kitten.git"
 
 group :development, :test do
