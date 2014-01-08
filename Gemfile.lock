@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: d32f3d11e4cb70fea6b32bdf83be5d100afee4c6
+  revision: 72e16b679dae81677c8596a0d9b70011f536e70f
   specs:
     data_kitten (0.0.1)
       curb
@@ -38,9 +38,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
-    airbrake (3.1.14)
+    airbrake (3.1.15)
       builder
-      json
+      multi_json
     arel (4.0.1)
     atomic (1.1.14)
     builder (3.1.4)
@@ -77,14 +77,14 @@ GEM
       multi_json (>= 1.7.5, < 2.0)
       nokogiri (~> 1.6.0)
       oauth2
-    haml (4.0.4)
+    haml (4.0.5)
       tilt
     hashie (2.0.5)
     hike (1.2.3)
     htmlentities (4.3.1)
     httpauth (0.2.0)
     i18n (0.6.9)
-    jbuilder (2.0.1)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
