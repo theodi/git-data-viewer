@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/theodi/data_kitten.git
-  revision: 28e566a055dcc1471fa7a4fc6e1278496f4006aa
+  revision: ed567207486d00af9a33728e5cc0ddf8216f5acc
   specs:
     data_kitten (0.0.1)
       curb
@@ -41,7 +41,7 @@ GEM
     airbrake (3.1.15)
       builder
       multi_json
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     builder (3.1.4)
     coffee-rails (4.0.1)
@@ -123,7 +123,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.15)
-    net-http-persistent (2.9.1)
+    net-http-persistent (2.9.4)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth2 (0.9.3)
