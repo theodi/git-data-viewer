@@ -43,6 +43,6 @@ gem 'github_api'
 gem 'dotenv'
 
 group :test, :development do
-  gem "simplecov-rcov"
+  gem "coveralls"
   gem "rspec-rails", "~> 2.0"
 end
