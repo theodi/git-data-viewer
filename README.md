@@ -1,8 +1,11 @@
-# Git Data Viewer
+[![Build Status](http://img.shields.io/travis/theodi/git-data-viewer.svg)](https://travis-ci.org/theodi/git-data-viewer)
+[![Dependency Status](http://img.shields.io/gemnasium/theodi/git-data-viewer.svg)](https://gemnasium.com/theodi/git-data-viewer)
+[![Coverage Status](http://img.shields.io/coveralls/theodi/git-data-viewer.svg)](https://coveralls.io/r/theodi/git-data-viewer)
+[![Code Climate](http://img.shields.io/codeclimate/github/theodi/git-data-viewer.svg)](https://codeclimate.com/github/theodi/git-data-viewer)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://theodi.mit-license.org)
+[![Badges](http://img.shields.io/:badges-6/6-ff6799.svg)](https://github.com/pikesley/badger)
 
-[![Build Status](http://jenkins.theodi.org/job/git-data-viewer-master/badge/icon)](http://jenkins.theodi.org/job/git-data-viewer-master/)
-[![Dependency Status](https://gemnasium.com/theodi/git-data-viewer.png)](https://gemnasium.com/theodi/git-data-viewer)
-[![Code Climate](https://codeclimate.com/github/theodi/git-data-viewer.png)](https://codeclimate.com/github/theodi/git-data-viewer)
+# Git Data Viewer
 
 An experiment in displaying Open Data stored in Git in a nice way for non-developers.
 
