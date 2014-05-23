@@ -4,14 +4,14 @@
   <div class='sample-data'>
     <table class='table table-striped'>
       <tr>
-        <% file.headers.each do |header| %>
-          <th><%= header %></th>
+        <% file.schema['fields'].each do |field| %>
+          <th><%= field['name'] %></th>
         <% end %>
       </tr>
       <% preview_data.each do |row| %>
         <tr>
-          <% file.headers.each do |header| %>
-            <td><%= row[header] %></td>
+          <% file.schema['fields'].each do |field| %>
+            <td><%= row[field['name']] %></td>
           <% end %>
         </tr>
       <% end %>
@@ -19,4 +19,3 @@
     </table>
   </div>
 <% end %>
-  
