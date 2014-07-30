@@ -12,7 +12,7 @@
 <% if file.schema %>
   <table class='table table-striped'>
     <tr>
-      <th>ID</th>
+      <th>Name</th>
       <th>Label</th>
       <th>Description</th>
       <th>Type</th>
@@ -21,7 +21,7 @@
     </tr>
     <% file.schema['fields'].each do |field| %>
       <tr>
-        <td><%= field['id'] %></td>
+        <td><%= field['name'] %></td>
         <td><%= field['label'] %></td>
         <td><%= field['description'] %></td>
         <td><%= field['type'] %></td>
