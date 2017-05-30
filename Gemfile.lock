@@ -268,7 +268,7 @@ GEM
     uglifier (2.6.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    yard (0.8.7.6)
+    yard (0.9.9)
 
 PLATFORMS
   ruby
