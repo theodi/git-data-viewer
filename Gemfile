@@ -44,5 +44,5 @@ gem 'dotenv'
 
 group :test, :development do
   gem "coveralls"
-  gem "rspec-rails", "~> 2.0"
+  gem "rspec-rails", "~> 3.6"
 end
