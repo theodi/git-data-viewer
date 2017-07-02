@@ -139,7 +139,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    mysql2 (0.4.6)
+    mysql2 (0.4.7)
     net-http-persistent (2.9.4)
     netrc (0.11.0)
     nokogiri (1.7.2)
@@ -300,3 +300,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 3.2.0)
   yard
+
+RUBY VERSION
+   ruby 2.4.1p111
