@@ -40,9 +40,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.4.0)
-    airbrake (4.1.0)
-      builder
-      multi_json
+    airbrake (6.2.1)
+      airbrake-ruby (~> 2.3, >= 2.3.1)
+    airbrake-ruby (2.3.1)
     arel (4.0.2)
     builder (3.1.4)
     coffee-rails (4.0.1)
