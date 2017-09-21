@@ -40,9 +40,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.4.0)
-    airbrake (4.1.0)
-      builder
-      multi_json
+    airbrake (6.3.0)
+      airbrake-ruby (~> 2.4)
+    airbrake-ruby (2.4.0)
     arel (4.0.2)
     builder (3.1.4)
     coffee-rails (4.0.1)
@@ -136,7 +136,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (4.7.5)
-    multi_json (1.12.1)
+    multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.4.9)
