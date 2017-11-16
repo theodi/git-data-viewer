@@ -46,13 +46,13 @@ GEM
       multi_json
     arel (4.0.2)
     builder (3.1.4)
-    coffee-rails (4.0.1)
+    coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+      railties (>= 4.0.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.12.2)
     colorize (0.7.3)
     concurrent-ruby (1.0.5)
     coveralls (0.8.21)
@@ -283,7 +283,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
-  coffee-rails (~> 4.0.0)
+  coffee-rails (~> 4.2.2)
   coveralls
   data_kitten!
   dotenv
