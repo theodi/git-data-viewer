@@ -49,10 +49,10 @@ GEM
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.12.2)
     colorize (0.7.3)
     concurrent-ruby (1.0.5)
     coveralls (0.8.21)
@@ -138,7 +138,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (4.7.5)
-    multi_json (1.12.2)
+    multi_json (1.13.0)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.4.10)
@@ -276,8 +276,9 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.8)
     tins (1.14.0)
-    turbolinks (2.5.3)
-      coffee-rails
+    turbolinks (5.1.0)
+      turbolinks-source (~> 5.1)
+    turbolinks-source (5.1.0)
     tzinfo (0.3.53)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
