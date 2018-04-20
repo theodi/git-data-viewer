@@ -74,7 +74,7 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.2.1)
+    dotenv (2.3.0)
     ebnf (0.3.6)
       haml (~> 4.0)
       rdf (~> 1.1)
