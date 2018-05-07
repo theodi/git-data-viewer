@@ -41,9 +41,9 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (4.1.0)
-      builder
-      multi_json
+    airbrake (7.3.1)
+      airbrake-ruby (~> 2.10)
+    airbrake-ruby (2.10.0)
     arel (4.0.2)
     builder (3.1.4)
     coffee-rails (4.0.1)
@@ -138,7 +138,7 @@ GEM
     mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (4.7.5)
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mysql2 (0.4.10)
